@@ -1,9 +1,185 @@
-let htmlText="",iconData="";const $=x=>document.getElementById(x);
-$("htmlFile").onchange=e=>{let f=e.target.files[0];if(!f)return;$("fileName").textContent=f.name;let r=new FileReader();r.onload=()=>{htmlText=r.result;$("preview").srcdoc=htmlText};r.readAsText(f)};
-$("iconFile").onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{iconData=r.result;$("iconPreview").src=r.result;$("iconPreview").style.display="block"};r.readAsDataURL(f)};
-function pkgOK(x){return /^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z][A-Za-z0-9_]*)+$/.test(x)}
-function settings(){return{appName:$("appName").value.trim()||"My HTML App",packageName:$("packageName").value.trim()||"com.example.myhtmlapp",version:$("version").value.trim()||"1.0.0",orientation:$("orientation").value,bg:$("bgColor").value,status:$("statusColor").value,nav:$("navColor").value,fullscreen:$("fullscreen").checked,dark:$("darkMode").checked,permissions:[...document.querySelectorAll(".checks input:checked")].map(x=>x.value),storage:$("storage").value,back:$("backNavigation").checked,zoom:$("zoom").checked,mixed:$("mixedContent").checked}}
-function manifest(m){let map={CAMERA:"android.permission.CAMERA",RECORD_AUDIO:"android.permission.RECORD_AUDIO",ACCESS_FINE_LOCATION:"android.permission.ACCESS_FINE_LOCATION",ACCESS_COARSE_LOCATION:"android.permission.ACCESS_COARSE_LOCATION",READ_MEDIA_IMAGES:"android.permission.READ_MEDIA_IMAGES",POST_NOTIFICATIONS:"android.permission.POST_NOTIFICATIONS",VIBRATE:"android.permission.VIBRATE",INTERNET:"android.permission.INTERNET"};let p=m.permissions.filter(x=>map[x]).map(x=>`    <uses-permission android:name="${map[x]}"/>`).join("\n");return `<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android">\n${p}\n<application android:theme="@style/AppTheme" android:label="${m.appName}" android:usesCleartextTraffic="${m.mixed}"><activity android:name=".MainActivity" android:screenOrientation="${m.orientation}" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity></application></manifest>`}
-function mainJava(m){return `package ${m.packageName};\nimport android.app.*;import android.os.*;import android.webkit.*;import android.graphics.Color;\npublic class MainActivity extends Activity{WebView w;public void onCreate(Bundle b){super.onCreate(b);w=new WebView(this);WebSettings s=w.getSettings();s.setJavaScriptEnabled(true);s.setDomStorageEnabled(true);s.setBuiltInZoomControls(${m.zoom});s.setDisplayZoomControls(false);w.setBackgroundColor(Color.parseColor("${m.bg}"));setContentView(w);w.loadUrl("file:///android_asset/index.html");}public void onBackPressed(){if(${m.back}&&w.canGoBack())w.goBack();else super.onBackPressed();}}`}
-async function build(){if(!htmlText){$("status").textContent="Choose an index.html first.";return}let m=settings();if(!pkgOK(m.packageName)){$("status").textContent="Invalid package name. Example: com.example.workingheart";return}if(!window.JSZip){$("status").textContent="ZIP library unavailable. Check internet and refresh.";return}$("status").textContent="Generating…";let z=new JSZip();z.file("README.txt",`Generated HTML Android project\nApp: ${m.appName}\nPackage: ${m.packageName}\n\nOpen this project in Android Studio and build it.\nWebsite: app/src/main/assets/index.html\nSelected permissions are declared in AndroidManifest.xml. Runtime permissions may still need to be requested by the app.`);z.file("builder-settings.json",JSON.stringify(m,null,2));z.file("settings.gradle.kts",`pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }\ndependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories{google();mavenCentral()} }\nrootProject.name="HTMLApp"\ninclude(":app")`);z.file("build.gradle.kts",'plugins { id("com.android.application") version "8.6.1" apply false }');z.file("app/build.gradle.kts",`plugins { id("com.android.application") }\nandroid { namespace = "${m.packageName}"; compileSdk = 35\n defaultConfig { applicationId = "${m.packageName}"; minSdk = 23; targetSdk = 35; versionCode = 1; versionName = "${m.version}" }\n}`);z.file("app/src/main/AndroidManifest.xml",manifest(m));z.file("app/src/main/java/"+m.packageName.replace(/\\./g,"/")+"/MainActivity.java",mainJava(m));z.file("app/src/main/res/values/styles.xml",`<resources><style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar"><item name="android:statusBarColor">${m.status}</item><item name="android:navigationBarColor">${m.nav}</item><item name="android:windowLightStatusBar">${!m.dark}</item></style></resources>`);z.file("app/src/main/assets/index.html",htmlText);if(iconData)z.file("app/src/main/assets/app-icon-data.txt",iconData);let blob=await z.generateAsync({type:"blob"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(m.appName.replace(/[^A-Za-z0-9]+/g,"-")||"html-app")+"-android-project.zip";a.click();$("status").textContent="Done — Android project ZIP generated."}
-$("build").onclick=build;
+const $ = (selector) => document.querySelector(selector);
+const rangeButtons = [...document.querySelectorAll(".range-option")];
+let rangeMax = 100;
+let scanInfo = {};
+let toastTimer;
+
+function browserName(ua) {
+  if (/SamsungBrowser/i.test(ua)) return "Samsung Internet";
+  if (/EdgA|EdgiOS|Edg\//i.test(ua)) return "Edge";
+  if (/OPR|Opera/i.test(ua)) return "Opera";
+  if (/Firefox/i.test(ua)) return "Firefox";
+  if (/Chrome|CriOS/i.test(ua)) return "Chrome";
+  if (/Safari/i.test(ua)) return "Safari";
+  return "Unknown";
+}
+function short(value, fallback = "Not exposed") {
+  return value === undefined || value === null || value === "" ? fallback : String(value);
+}
+async function scanDevice() {
+  $("#deviceState").textContent = "SCANNING";
+  $("#deviceName").textContent = "Detecting device…";
+  const ua = navigator.userAgent || "";
+  let model = "", platform = navigator.userAgentData?.platform || navigator.platform || "Unknown";
+  let androidVersion = "", architecture = "";
+  if (navigator.userAgentData) {
+    try {
+      const d = await navigator.userAgentData.getHighEntropyValues(["model", "platformVersion", "architecture"]);
+      model = d.model || "";
+      androidVersion = d.platformVersion || "";
+      platform = d.platform || platform;
+      architecture = d.architecture || "";
+    } catch (_) {}
+  }
+  const android = /Android/i.test(ua) || /Android/i.test(platform);
+  const deviceName = model || (android ? "Android device" : platform || "Unknown device");
+  $("#deviceName").textContent = deviceName;
+  $("#deviceSub").textContent = android
+    ? `${short(androidVersion, "Android version hidden")} · Browser-reported details`
+    : "Not identified as Android by this browser";
+  $("#screenInfo").textContent = `${screen.width} × ${screen.height}`;
+  $("#ramInfo").textContent = typeof navigator.deviceMemory === "number" ? `~${navigator.deviceMemory} GB` : "Unavailable";
+  $("#cpuInfo").textContent = Number.isFinite(navigator.hardwareConcurrency) ? `${navigator.hardwareConcurrency} threads` : "Unavailable";
+  $("#browserInfo").textContent = browserName(ua);
+  $("#platformInfo").textContent = android ? "Android" : short(platform, "Unknown");
+  $("#pixelInfo").textContent = `${window.devicePixelRatio || 1}×`;
+  $("#deviceState").textContent = android ? "DEVICE READY" : "LIMITED DATA";
+  scanInfo = {
+    android, model, androidVersion, architecture,
+    screen: Math.max(1, screen.width * screen.height),
+    ram: navigator.deviceMemory || 0,
+    cpu: navigator.hardwareConcurrency || 0,
+    pixelRatio: window.devicePixelRatio || 1
+  };
+}
+rangeButtons.forEach(button => button.addEventListener("click", () => {
+  rangeButtons.forEach(b => b.classList.toggle("active", b === button));
+  rangeMax = Number(button.dataset.max);
+  $("#scaleSelect").value = String(rangeMax);
+}));
+$("#rescan").addEventListener("click", scanDevice);
+
+const styles = {
+  "one-tap": {name:"One-tap", base:[96,91,84,76,48,67], factor:[1.02,1.03,1.02,1,0.98,1.02]},
+  balanced: {name:"Balanced", base:[92,86,78,70,48,62], factor:[1,1,1,1,1,1]},
+  rush: {name:"Rush", base:[98,94,88,79,52,70], factor:[1.03,1.03,1.04,1.02,1,1.03]},
+  long: {name:"Long-range", base:[82,75,67,58,42,52], factor:[0.97,0.97,0.96,0.96,0.98,0.96]},
+  smooth: {name:"Smooth", base:[88,81,73,64,45,58], factor:[0.98,0.98,0.98,0.98,0.98,0.98]}
+};
+const labels = ["General", "Red Dot", "2× Scope", "4× Scope", "Sniper Scope", "Free Look"];
+
+function makeSettings() {
+  const styleKey = $("#styleSelect").value;
+  const style = styles[styleKey] || styles["one-tap"];
+  const performance = $("#performanceSelect").value;
+  // These are transparent heuristics, not a real FPS or touch-latency benchmark.
+  let deviceAdjustment = 0;
+  if (scanInfo.ram && scanInfo.ram <= 2) deviceAdjustment -= 4;
+  else if (scanInfo.ram >= 8) deviceAdjustment += 2;
+  if (scanInfo.cpu && scanInfo.cpu <= 4) deviceAdjustment -= 2;
+  if (scanInfo.pixelRatio >= 3) deviceAdjustment -= 1;
+  const perfAdjustment = performance === "smooth" ? -5 : performance === "responsive" ? 4 : 0;
+  const factor = rangeMax / 100;
+  return style.base.map((base, i) => {
+    const raw = Math.round((base * style.factor[i] + deviceAdjustment + perfAdjustment) * factor);
+    return Math.max(0, Math.min(rangeMax, raw));
+  });
+}
+function showToast(message) {
+  const toast = $("#toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 2300);
+}
+function renderResults(values) {
+  const styleKey = $("#styleSelect").value;
+  const style = styles[styleKey] || styles["one-tap"];
+  $("#resultStyle").textContent = style.name;
+  $("#resultRange").textContent = `0–${rangeMax}`;
+  $("#resultFit").textContent = $("#performanceSelect").selectedOptions[0].textContent.split(" ")[0];
+  $("#sensitivityRows").replaceChildren();
+  values.forEach((value, i) => {
+    const row = document.createElement("div");
+    row.className = "sensitivity-row";
+    const top = document.createElement("div");
+    top.className = "sens-top";
+    const name = document.createElement("span");
+    name.textContent = labels[i];
+    const number = document.createElement("strong");
+    number.textContent = value;
+    top.append(name, number);
+    const track = document.createElement("div");
+    track.className = "sens-track";
+    const fill = document.createElement("div");
+    fill.style.width = `${value / rangeMax * 100}%`;
+    track.append(fill);
+    row.append(top, track);
+    $("#sensitivityRows").append(row);
+  });
+  $("#results").classList.remove("hidden");
+}
+let generating = false;
+async function generate() {
+  if (generating) return;
+  generating = true;
+  $("#generateBtn").disabled = true;
+  $("#generateText").textContent = "ANALYZING PROFILE…";
+  $("#progressWrap").classList.remove("hidden");
+  $("#results").classList.add("hidden");
+  const start = Date.now();
+  const duration = 20000;
+  const phases = [
+    [0, "Reading browser-accessible device hints…"],
+    [25, "Checking screen and hardware hints…"],
+    [50, "Applying your selected play style…"],
+    [75, "Building sensitivity recommendations…"],
+    [95, "Finalizing your profile…"]
+  ];
+  await new Promise(resolve => {
+    function tick() {
+      const elapsed = Date.now() - start;
+      const percent = Math.min(100, Math.floor(elapsed / duration * 100));
+      $("#progressBar").style.width = `${percent}%`;
+      $("#progressPercent").textContent = `${percent}%`;
+      const phase = [...phases].reverse().find(p => percent >= p[0]);
+      if (phase) $("#progressLabel").textContent = phase[1];
+      if (elapsed >= duration) resolve();
+      else requestAnimationFrame(tick);
+    }
+    tick();
+  });
+  const values = makeSettings();
+  renderResults(values);
+  $("#progressLabel").textContent = "Profile generated";
+  $("#progressPercent").textContent = "100%";
+  $("#generateText").textContent = "GENERATE AGAIN";
+  $("#generateBtn").disabled = false;
+  generating = false;
+  $("#results").scrollIntoView({behavior:"smooth", block:"start"});
+}
+$("#generateBtn").addEventListener("click", generate);
+$("#againBtn").addEventListener("click", () => {
+  $("#results").classList.add("hidden");
+  $("#generateBtn").scrollIntoView({behavior:"smooth", block:"center"});
+});
+$("#copyBtn").addEventListener("click", async () => {
+  const lines = [
+    "Craft X Gamer — Sensitivity Pro",
+    `Style: ${$("#resultStyle").textContent}`,
+    `Range: ${$("#resultRange").textContent}`,
+    ...[...$("#sensitivityRows").children].map(row => `${row.querySelector(".sens-top span").textContent}: ${row.querySelector(".sens-top strong").textContent}`)
+  ];
+  try {
+    await navigator.clipboard.writeText(lines.join("\n"));
+    showToast("Settings copied to clipboard");
+  } catch (_) {
+    const area = document.createElement("textarea");
+    area.value = lines.join("\n");
+    document.body.append(area); area.select();
+    const success = document.execCommand("copy");
+    area.remove();
+    showToast(success ? "Settings copied to clipboard" : "Copy not available in this browser");
+  }
+});
+scanDevice();

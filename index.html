@@ -1,10 +1,98 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HTML → APK Builder</title><link rel="stylesheet" href="style.css"></head><body><main><header><div>📱</div><section><h1>HTML → APK Builder</h1><p>Turn an HTML website into a ready-to-build Android project.</p></section></header>
-<div class="card"><h2>1. Website</h2><label class="drop">📄 <b>Choose index.html</b><small>HTML file only</small><input id="htmlFile" type="file" accept=".html,text/html"></label><p id="fileName">No file selected</p></div>
-<div class="card"><h2>2. App details</h2><div class="grid"><label>App name<input id="appName" value="My HTML App"></label><label>Package name<input id="packageName" value="com.example.myhtmlapp"></label><label>Version<input id="version" value="1.0.0"></label><label>Orientation<select id="orientation"><option>portrait</option><option>landscape</option><option>unspecified</option></select></label></div></div>
-<div class="card"><h2>3. App icon</h2><label class="drop">🖼️ <b>Choose icon</b><small>PNG/JPG/WebP</small><input id="iconFile" type="file" accept="image/png,image/jpeg,image/webp"></label><img id="iconPreview"></div>
-<div class="card"><h2>4. Appearance</h2><div class="grid"><label>Background<input id="bgColor" type="color" value="#0b1020"></label><label>Status bar<input id="statusColor" type="color" value="#0b1020"></label><label>Navigation bar<input id="navColor" type="color" value="#000000"></label></div><label class="check"><input id="fullscreen" type="checkbox"> Full screen</label><label class="check"><input id="darkMode" type="checkbox" checked> Dark system UI</label></div>
-<div class="card"><h2>5. Permissions</h2><p class="muted">Select only permissions your website needs.</p><div class="checks"><label class="check"><input value="CAMERA" type="checkbox">📷 Camera</label><label class="check"><input value="RECORD_AUDIO" type="checkbox">🎤 Microphone</label><label class="check"><input value="ACCESS_FINE_LOCATION" type="checkbox">📍 Precise location</label><label class="check"><input value="ACCESS_COARSE_LOCATION" type="checkbox">📍 Approximate location</label><label class="check"><input value="READ_MEDIA_IMAGES" type="checkbox">🖼️ Photos</label><label class="check"><input value="POST_NOTIFICATIONS" type="checkbox">🔔 Notifications</label><label class="check"><input value="VIBRATE" type="checkbox">📳 Vibration</label><label class="check"><input value="INTERNET" type="checkbox" checked>🌐 Internet</label></div></div>
-<div class="card"><h2>6. Storage</h2><select id="storage"><option value="local">Local WebView storage (recommended)</option><option value="shared">Shared media/storage access</option><option value="none">No special storage</option></select><p class="muted">LocalStorage/IndexedDB normally need no storage permission.</p></div>
-<div class="card"><h2>7. Extra</h2><label class="check"><input id="backNavigation" type="checkbox" checked> Enable Android back navigation</label><label class="check"><input id="zoom" type="checkbox"> Allow pinch zoom</label><label class="check"><input id="mixedContent" type="checkbox"> Allow HTTP mixed content</label></div>
-<div class="card"><h2>8. Generate</h2><div class="warning">A normal website cannot compile a real APK entirely inside the browser. This tool generates a ready-to-build Android Studio/Gradle project ZIP.</div><button id="build">🚀 Generate Android Project ZIP</button><p id="status"></p></div>
-<div class="card"><h2>Preview</h2><iframe id="preview"></iframe></div><footer>Your selected HTML is processed locally by this page.</footer></main><script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1017">
+  <title>Craft X Gamer — Sensitivity Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="app">
+    <header class="brand">
+      <div class="brand-mark">CX</div>
+      <div><h1>CRAFT <span>X</span> GAMER</h1><p>SENSITIVITY <b>PRO</b></p></div>
+      <div class="live-pill"><i></i> READY</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="spark">✦</span> PERSONALIZED SETUP</div>
+        <h2>Find your<br><span>one-tap flow.</span></h2>
+        <p>Build a sensitivity profile around your phone and play style.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="target-ring ring-a"></div><div class="target-ring ring-b"></div>
+        <div class="target-center">X</div><div class="crosshair cross-one">＋</div><div class="crosshair cross-two">＋</div>
+      </div>
+    </section>
+
+    <section class="panel device-panel">
+      <div class="section-head"><div><span class="step">01</span><h3>YOUR DEVICE</h3></div><span id="deviceState" class="state">SCANNING</span></div>
+      <div class="device-top">
+        <div class="phone-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4M11 19h2"/></svg></div>
+        <div class="device-name"><strong id="deviceName">Detecting device…</strong><span id="deviceSub">Reading browser-accessible details</span></div>
+        <button id="rescan" class="icon-btn" title="Scan again" aria-label="Scan again">↻</button>
+      </div>
+      <div class="device-grid">
+        <div class="device-stat"><span>SCREEN</span><strong id="screenInfo">—</strong></div>
+        <div class="device-stat"><span>RAM ESTIMATE</span><strong id="ramInfo">—</strong></div>
+        <div class="device-stat"><span>CPU THREADS</span><strong id="cpuInfo">—</strong></div>
+        <div class="device-stat"><span>BROWSER</span><strong id="browserInfo">—</strong></div>
+        <div class="device-stat"><span>PLATFORM</span><strong id="platformInfo">—</strong></div>
+        <div class="device-stat"><span>PIXEL RATIO</span><strong id="pixelInfo">—</strong></div>
+      </div>
+      <p class="footnote">Phone model may be hidden by your browser. RAM is an estimate; this page cannot read total storage, real FPS, GPU load, or Free Fire's internal settings.</p>
+    </section>
+
+    <section class="panel preferences">
+      <div class="section-head"><div><span class="step">02</span><h3>YOUR PLAY STYLE</h3></div><span class="mini-label">CUSTOM PROFILE</span></div>
+      <label class="field-label" for="styleSelect">Sensitivity style</label>
+      <div class="select-wrap"><select id="styleSelect">
+        <option value="balanced">Balanced — all-round play</option>
+        <option value="one-tap" selected>One-tap — drag headshots</option>
+        <option value="rush">Rush — close-range fights</option>
+        <option value="long">Long-range — steady aim</option>
+        <option value="smooth">Smooth — controlled movement</option>
+      </select><span>⌄</span></div>
+
+      <label class="field-label" for="scaleSelect">Sensitivity range</label>
+      <div class="range-options" role="group" aria-label="Sensitivity range">
+        <button type="button" class="range-option active" data-max="100"><strong>0–100</strong><span>Classic range</span></button>
+        <button type="button" class="range-option" data-max="200"><strong>0–200</strong><span>Extended range</span></button>
+      </div>
+      <input id="scaleSelect" type="hidden" value="100">
+
+      <label class="field-label" for="performanceSelect">Performance priority</label>
+      <div class="select-wrap"><select id="performanceSelect">
+        <option value="smooth">Smooth gameplay</option>
+        <option value="balanced" selected>Balanced performance</option>
+        <option value="responsive">Fast response</option>
+      </select><span>⌄</span></div>
+    </section>
+
+    <section class="generate-area">
+      <div class="generate-note"><span class="pulse-dot"></span><span>20-SECOND PROFILE ANALYSIS</span></div>
+      <button id="generateBtn" class="generate-btn"><span id="generateText">GENERATE SENSITIVITY</span><span class="btn-arrow">↗</span></button>
+      <div class="progress-wrap hidden" id="progressWrap">
+        <div class="progress-top"><span id="progressLabel">Analyzing device profile…</span><strong id="progressPercent">0%</strong></div>
+        <div class="progress-track"><div id="progressBar"></div></div>
+        <p>Using available browser hints and your selected play style. This is an estimate, not a live FPS benchmark.</p>
+      </div>
+    </section>
+
+    <section id="results" class="panel results hidden" aria-live="polite">
+      <div class="result-head"><div><span class="step">03</span><h3>YOUR SENSITIVITY PROFILE</h3></div><span class="result-tag">GENERATED</span></div>
+      <div class="result-summary"><div><span class="summary-label">PROFILE</span><strong id="resultStyle">One-tap</strong></div><div><span class="summary-label">RANGE</span><strong id="resultRange">0–100</strong></div><div><span class="summary-label">DEVICE FIT</span><strong id="resultFit">Balanced</strong></div></div>
+      <div id="sensitivityRows" class="sensitivity-list"></div>
+      <div class="result-actions"><button id="copyBtn" class="secondary-btn">▣ Copy settings</button><button id="againBtn" class="outline-btn">Regenerate</button></div>
+      <p class="footnote">Starting-point suggestions only. Test in Training Ground and adjust gradually to your HUD, DPI, touch response, and personal control.</p>
+    </section>
+
+    <footer><span>CRAFT X GAMER</span><span>UNOFFICIAL FAN TOOL · NOT AFFILIATED WITH GARENA</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
