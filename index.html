@@ -1,98 +1,258 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b1017">
-  <title>Craft X Gamer — Sensitivity Pro</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10152b">
+<title>Valency Quiz | Class 10 Practice</title>
+<style>
+:root{--bg:#0b1020;--panel:#151d36;--panel2:#1b2745;--text:#f4f7ff;--muted:#aab5d1;--cyan:#65e4f2;--purple:#a78bfa;--green:#4ade80;--red:#fb7185}
+*{box-sizing:border-box}html{width:100%;overflow-x:hidden}body{margin:0;min-height:100svh;width:100%;overflow-x:hidden;padding-bottom:112px;background:radial-gradient(ellipse at 15% 0%,#26345f 0,transparent 38%),radial-gradient(ellipse at 100% 90%,#34265c 0,transparent 35%),var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;padding:22px}
+.wrap{width:min(100%,850px);margin:0 auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}.brand{font-size:13px;color:var(--cyan);letter-spacing:2px;font-weight:800}.pill{border:1px solid #354365;border-radius:999px;padding:8px 12px;color:var(--muted);font-size:12px}
+h1{font-size:clamp(32px,7vw,54px);line-height:1.05;margin:8px 0 10px;letter-spacing:-1.8px}.grad{background:linear-gradient(90deg,var(--cyan),#b7a0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:0 0 22px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.stat,.card{background:linear-gradient(145deg,#1a2543,#121a31);border:1px solid #2b395d;border-radius:18px}.stat{padding:13px 15px}.stat small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px}.stat strong{font-size:23px;display:block;margin-top:3px}.progress{height:8px;background:#273452;border-radius:20px;overflow:hidden;margin:12px 0 22px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:width .4s ease}
+.card{padding:clamp(20px,5vw,34px);box-shadow:0 18px 60px #0004;animation:rise .4s ease}.roundline{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px;margin-bottom:20px}.qtag{color:var(--cyan);font-weight:800;letter-spacing:1.5px;font-size:12px}.question{font-size:clamp(23px,4vw,32px);font-weight:750;line-height:1.25;margin:10px 0 8px}.hint{color:var(--muted);font-size:14px;margin:0 0 22px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice{background:#202d4e;color:var(--text);border:1px solid #3a4b72;border-radius:14px;padding:17px;text-align:left;font-size:17px;font-weight:700;cursor:pointer;transition:.2s;min-height:62px}.choice:hover:not(:disabled){transform:translateY(-3px);border-color:var(--cyan);background:#26385d}.choice:disabled{cursor:default;opacity:1}.choice.correct{border-color:var(--green);background:#123c36}.choice.wrong{border-color:var(--red);background:#482538}.choice span{color:var(--muted);font-size:12px;margin-right:10px}
+.feedback{display:none;margin-top:16px;padding:13px 15px;border-radius:12px;font-size:14px;line-height:1.5}.feedback.show{display:block;animation:rise .25s ease}.feedback.good{background:#123c36;color:#c7ffe0}.feedback.bad{background:#482538;color:#ffe0e7}.actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px}.btn{border:0;border-radius:12px;padding:13px 19px;font-size:14px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(100deg,var(--cyan),#a78bfa);color:#10152b}.secondary{background:#263452;color:var(--text);border:1px solid #3a4b72}.btn:disabled{opacity:.35;cursor:not-allowed}.setup{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px;color:var(--muted);font-size:13px}.setup select{background:#202d4e;color:white;border:1px solid #3a4b72;border-radius:10px;padding:9px}.hidden{display:none!important}
+.result{text-align:center}.medal{font-size:58px;margin:4px 0 8px}.score{font-size:clamp(45px,10vw,72px);font-weight:900;letter-spacing:-3px;background:linear-gradient(90deg,var(--cyan),#c4a8ff);-webkit-background-clip:text;color:transparent}.result h2{font-size:30px;margin:5px}.result p{color:var(--muted)}.resultgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.resultgrid div{padding:14px;background:#202d4e;border-radius:13px}.resultgrid strong{display:block;font-size:23px}.resultgrid small{color:var(--muted)}.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:18px}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:560px){
+ body{padding:10px}
+ .top{margin-bottom:12px}
+ h1{font-size:clamp(29px,9vw,40px);margin:5px 0 6px;letter-spacing:-1px}
+ .sub{font-size:13px;line-height:1.4;margin-bottom:12px}
+ .stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:12px 0 10px}
+ .stat{padding:8px 6px;border-radius:12px;min-width:0}
+ .stat small{font-size:9px;letter-spacing:.4px;white-space:nowrap}
+ .stat strong{font-size:19px}
+ .progress{margin:8px 0 12px;height:6px}
+ .card{padding:15px;border-radius:15px}
+ .roundline{font-size:11px;margin-bottom:13px}
+ .question{font-size:clamp(20px,6vw,26px);margin:7px 0 5px}
+ .hint{font-size:12px;margin-bottom:13px}
+ .choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .choice{padding:12px 9px;min-height:48px;font-size:14px;border-radius:11px}
+ .choice span{margin-right:5px;font-size:10px}
+ .feedback{font-size:12px;padding:10px;margin-top:10px}
+ .actions{margin-top:13px;gap:8px;align-items:center}
+ .actions .btn{flex:0 1 auto;padding:11px 13px;font-size:12px}
+ #liveScore{font-size:11px!important}
+ .setup{margin-top:12px;font-size:11px;gap:8px}
+ .setup select{padding:7px}
+ .resultgrid{gap:7px;margin:15px 0}
+ .resultgrid div{padding:10px 5px}
+ .resultgrid strong{font-size:19px}
+ .resultgrid small{font-size:10px}
+ .result h2{font-size:24px}
+ .score{font-size:56px}
+}
+@media(max-height:700px) and (max-width:560px){
+ body{padding-top:7px;padding-bottom:7px}
+ .top{margin-bottom:7px}
+ .brand{font-size:10px}
+ .pill{font-size:9px;padding:6px 8px}
+ h1{font-size:29px}
+ .sub{margin-bottom:8px}
+ .stats{margin:8px 0}
+ .card{padding:12px}
+ .roundline{margin-bottom:9px}
+ .hint{margin-bottom:9px}
+ .choice{min-height:42px;padding:9px 7px}
+ .actions{margin-top:9px}
+ .setup{margin-top:8px}
+}
+
+.download-dock{
+ position:fixed;z-index:20;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+ background:linear-gradient(180deg,transparent 0%,rgba(9,14,29,.92) 22%,#0b1020 100%);
+ display:flex;justify-content:center;pointer-events:none
+}
+.chart-cta{
+ pointer-events:auto;width:min(100%,820px);min-height:76px;border:1px solid rgba(101,228,242,.65);
+ border-radius:20px;padding:13px 18px;display:flex;align-items:center;gap:14px;text-align:left;
+ color:#10152b;background:linear-gradient(105deg,#65e4f2,#b7a0ff);cursor:pointer;
+ box-shadow:0 0 0 0 rgba(101,228,242,.45),0 12px 35px #0008;
+ animation:ctaPulse 2.2s infinite
+}
+.chart-cta strong{display:block;font-size:17px;line-height:1.2}
+.chart-cta small{display:block;font-size:11px;margin-top:4px;opacity:.78}
+.cta-icon{font-size:27px;font-weight:900;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:#ffffff70}
+.cta-arrow{margin-left:auto;font-size:25px;font-weight:900}
+@keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(101,228,242,.35),0 12px 35px #0008;transform:translateY(0)}50%{box-shadow:0 0 0 8px rgba(101,228,242,0),0 15px 38px #0009;transform:translateY(-2px)}}
+@media(max-width:560px){
+ body{padding-bottom:100px}
+ .download-dock{padding:8px 10px calc(9px + env(safe-area-inset-bottom))}
+ .chart-cta{min-height:72px;padding:11px 13px;border-radius:17px;gap:10px}
+ .chart-cta strong{font-size:15px}
+ .chart-cta small{font-size:10px}
+ .cta-icon{width:36px;height:36px;font-size:23px}
+}
+
+</style>
 </head>
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-  <main class="app">
-    <header class="brand">
-      <div class="brand-mark">CX</div>
-      <div><h1>CRAFT <span>X</span> GAMER</h1><p>SENSITIVITY <b>PRO</b></p></div>
-      <div class="live-pill"><i></i> READY</div>
-    </header>
 
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="spark">✦</span> PERSONALIZED SETUP</div>
-        <h2>Find your<br><span>one-tap flow.</span></h2>
-        <p>Build a sensitivity profile around your phone and play style.</p>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="target-ring ring-a"></div><div class="target-ring ring-b"></div>
-        <div class="target-center">X</div><div class="crosshair cross-one">＋</div><div class="crosshair cross-two">＋</div>
-      </div>
-    </section>
+<div class="download-dock">
+  <button id="chartBtn" class="chart-cta">
+    <span class="cta-icon">⬇</span>
+    <span><strong>Download Elements Chart</strong><small>Atomic numbers • Symbols • Common valencies</small></span>
+    <span class="cta-arrow">↗</span>
+  </button>
+</div>
 
-    <section class="panel device-panel">
-      <div class="section-head"><div><span class="step">01</span><h3>YOUR DEVICE</h3></div><span id="deviceState" class="state">SCANNING</span></div>
-      <div class="device-top">
-        <div class="phone-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4M11 19h2"/></svg></div>
-        <div class="device-name"><strong id="deviceName">Detecting device…</strong><span id="deviceSub">Reading browser-accessible details</span></div>
-        <button id="rescan" class="icon-btn" title="Scan again" aria-label="Scan again">↻</button>
-      </div>
-      <div class="device-grid">
-        <div class="device-stat"><span>SCREEN</span><strong id="screenInfo">—</strong></div>
-        <div class="device-stat"><span>RAM ESTIMATE</span><strong id="ramInfo">—</strong></div>
-        <div class="device-stat"><span>CPU THREADS</span><strong id="cpuInfo">—</strong></div>
-        <div class="device-stat"><span>BROWSER</span><strong id="browserInfo">—</strong></div>
-        <div class="device-stat"><span>PLATFORM</span><strong id="platformInfo">—</strong></div>
-        <div class="device-stat"><span>PIXEL RATIO</span><strong id="pixelInfo">—</strong></div>
-      </div>
-      <p class="footnote">Phone model may be hidden by your browser. RAM is an estimate; this page cannot read total storage, real FPS, GPU load, or Free Fire's internal settings.</p>
-    </section>
+<div class="wrap">
+  <div class="top"><div class="brand">⚗ SCIENCE • CLASS 10</div><div class="pill">NCERT EXAM PRACTICE</div></div>
+  <h1><span class="grad">Valency</span> Quiz</h1>
+  <p class="sub">Master the common valencies of elements. One question at a time, shuffled every round.</p>
 
-    <section class="panel preferences">
-      <div class="section-head"><div><span class="step">02</span><h3>YOUR PLAY STYLE</h3></div><span class="mini-label">CUSTOM PROFILE</span></div>
-      <label class="field-label" for="styleSelect">Sensitivity style</label>
-      <div class="select-wrap"><select id="styleSelect">
-        <option value="balanced">Balanced — all-round play</option>
-        <option value="one-tap" selected>One-tap — drag headshots</option>
-        <option value="rush">Rush — close-range fights</option>
-        <option value="long">Long-range — steady aim</option>
-        <option value="smooth">Smooth — controlled movement</option>
-      </select><span>⌄</span></div>
+  <section id="quizArea">
+    <div class="stats">
+      <div class="stat"><small>Total</small><strong id="total">45</strong></div>
+      <div class="stat"><small>Remaining</small><strong id="remaining">45</strong></div>
+      <div class="stat"><small>Correct</small><strong id="correct">0</strong></div>
+      <div class="stat"><small>Incorrect</small><strong id="incorrect">0</strong></div>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="card" id="questionCard">
+      <div class="roundline"><span id="roundLabel">ROUND 1</span><span id="counter">QUESTION 1 / 45</span></div>
+      <div class="qtag">IDENTIFY THE VALENCY</div>
+      <div class="question" id="question">What is the common valency of Hydrogen (H)?</div>
+      <p class="hint">Choose the correct valency from the options below.</p>
+      <div class="choices" id="choices"></div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+      <div class="actions"><span id="liveScore" style="color:var(--muted);font-size:13px">Take your time. You’ve got this!</span><button class="btn primary" id="nextBtn" disabled>Next question →</button></div>
+    </div>
+    <div class="setup"><label for="count">Questions per round:</label><select id="count"><option value="40">40 questions</option><option value="45" selected>45 questions</option><option value="50">50 questions (all)</option></select><span>50 unique elements; no repeats within a round.</span></div>
+  </section>
 
-      <label class="field-label" for="scaleSelect">Sensitivity range</label>
-      <div class="range-options" role="group" aria-label="Sensitivity range">
-        <button type="button" class="range-option active" data-max="100"><strong>0–100</strong><span>Classic range</span></button>
-        <button type="button" class="range-option" data-max="200"><strong>0–200</strong><span>Extended range</span></button>
-      </div>
-      <input id="scaleSelect" type="hidden" value="100">
+  <section id="resultArea" class="card result hidden">
+    <div class="medal" id="medal">🏆</div>
+    <div class="qtag">ROUND COMPLETE</div>
+    <h2 id="resultTitle">Excellent work!</h2>
+    <div class="score" id="scoreText">0%</div>
+    <p id="resultMessage">Your practice result</p>
+    <div class="resultgrid">
+      <div><strong id="rCorrect">0</strong><small>Correct</small></div>
+      <div><strong id="rWrong">0</strong><small>Incorrect</small></div>
+      <div><strong id="rTotal">45</strong><small>Total questions</small></div>
+    </div>
+    <button class="btn primary" id="downloadBtn">⬇ Download result image</button>
+    <button class="btn secondary" id="againBtn" style="margin-left:7px">Start next random round ↻</button>
+    <p class="note">Your result image is generated in your browser. The next round reshuffles the element list, so the order will be different.</p>
+  </section>
+</div>
+<script>
+const elements = [
+ ["Hydrogen","H",1],["Lithium","Li",1],["Sodium","Na",1],["Potassium","K",1],["Rubidium","Rb",1],
+ ["Caesium","Cs",1],["Silver","Ag",1],["Fluorine","F",1],["Chlorine","Cl",1],["Bromine","Br",1],
+ ["Iodine","I",1],["Beryllium","Be",2],["Magnesium","Mg",2],["Calcium","Ca",2],["Strontium","Sr",2],
+ ["Barium","Ba",2],["Zinc","Zn",2],["Cadmium","Cd",2],["Oxygen","O",2],["Sulphur","S",2],
+ ["Iron","Fe",2],["Copper","Cu",2],["Nickel","Ni",2],["Cobalt","Co",2],["Manganese","Mn",2],
+ ["Aluminium","Al",3],["Boron","B",3],["Nitrogen","N",3],["Phosphorus","P",3],["Gallium","Ga",3],
+ ["Scandium","Sc",3],["Yttrium","Y",3],["Bismuth","Bi",3],["Carbon","C",4],["Silicon","Si",4],
+ ["Germanium","Ge",4],["Tin","Sn",4],["Lead","Pb",2],["Titanium","Ti",4],["Zirconium","Zr",4],
+ ["Gold","Au",3],["Chromium","Cr",3],["Vanadium","V",5],["Phosphorus","P",5],["Antimony","Sb",3],
+ ["Selenium","Se",2],["Tellurium","Te",2],["Helium","He",0],["Neon","Ne",0],["Argon","Ar",0]
+];
+// One commonly taught valency is used per element in this practice set; some elements can show other valencies in different compounds.
+const values=[0,1,2,3,4,5,6,7];
+let round=1, deck=[], index=0, right=0, wrong=0, answered=false, roundTotal=45, lastResult=null;
+const $=id=>document.getElementById(id);
+function shuffle(a){let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function startRound(){
+ roundTotal=Number($('count').value); deck=shuffle(elements).slice(0,roundTotal); index=0;right=0;wrong=0;answered=false;
+ $('quizArea').classList.remove('hidden');$('resultArea').classList.add('hidden');
+ $('total').textContent=roundTotal;$('remaining').textContent=roundTotal;$('correct').textContent='0';$('incorrect').textContent='0';
+ $('roundLabel').textContent='ROUND '+round;$('nextBtn').textContent='Next question →';renderQuestion();
+}
+function renderQuestion(){
+ answered=false;const item=deck[index];$('counter').textContent=`QUESTION ${index+1} / ${roundTotal}`;
+ $('question').textContent=`What is the common valency of ${item[0]} (${item[1]})?`;
+ $('feedback').className='feedback';$('feedback').textContent='';$('nextBtn').disabled=true;
+ $('liveScore').textContent='Choose one answer to continue.';
+ $('bar').style.width=(index/roundTotal*100)+'%';
+ let opts=shuffle([...new Set([item[2],...shuffle(values.filter(v=>v!==item[2])).slice(0,3)])]);
+ $('choices').innerHTML='';
+ opts.forEach((v,i)=>{let b=document.createElement('button');b.className='choice';b.innerHTML=`<span>${String.fromCharCode(65+i)}</span> Valency ${v}`;b.onclick=()=>choose(v,b);$('choices').appendChild(b)});
+ $('remaining').textContent=roundTotal-index;
+}
+function choose(value,button){
+ if(answered)return;answered=true;const item=deck[index],correct=value===item[2];
+ if(correct){right++;$('feedback').className='feedback show good';$('feedback').textContent=`✓ Correct! ${item[0]} (${item[1]}) has valency ${item[2]} in this question.`;button.classList.add('correct')}
+ else{wrong++;$('feedback').className='feedback show bad';$('feedback').textContent=`Not quite. The expected answer is valency ${item[2]} for ${item[0]} (${item[1]}).`;button.classList.add('wrong');[...$('choices').children].forEach(b=>{if(b.textContent.includes('Valency '+item[2]))b.classList.add('correct')})}
+ [...$('choices').children].forEach(b=>b.disabled=true);
+ $('correct').textContent=right;$('incorrect').textContent=wrong;$('remaining').textContent=roundTotal-index-1;
+ $('liveScore').textContent=`Correct: ${right}  •  Incorrect: ${wrong}`;
+ $('nextBtn').disabled=false;$('nextBtn').textContent=index===roundTotal-1?'View result →':'Next question →';
+ $('bar').style.width=((index+1)/roundTotal*100)+'%';
+}
+function next(){if(!answered)return;index++;if(index>=roundTotal)finish();else renderQuestion()}
+function finish(){
+ $('quizArea').classList.add('hidden');$('resultArea').classList.remove('hidden');
+ let pct=Math.round(right/roundTotal*100);lastResult={round,right,wrong,total:roundTotal,pct,date:new Date().toLocaleDateString()};
+ $('scoreText').textContent=pct+'%';$('rCorrect').textContent=right;$('rWrong').textContent=wrong;$('rTotal').textContent=roundTotal;
+ $('medal').textContent=pct>=90?'🏆':pct>=70?'🥇':pct>=50?'🎯':'📘';
+ $('resultTitle').textContent=pct>=90?'Outstanding performance!':pct>=70?'Great work!':pct>=50?'Good effort!':'Keep practising!';
+ $('resultMessage').textContent=`You answered ${right} out of ${roundTotal} questions correctly.`;
+}
+function downloadResult(){
+ if(!lastResult)return;const c=document.createElement('canvas');c.width=1200;c.height=760;const x=c.getContext('2d');
+ let g=x.createLinearGradient(0,0,1200,760);g.addColorStop(0,'#101a38');g.addColorStop(1,'#39285e');x.fillStyle=g;x.fillRect(0,0,1200,760);
+ x.fillStyle='#65e4f2';x.font='bold 28px Arial';x.fillText('CLASS 10 • SCIENCE PRACTICE',90,95);
+ x.fillStyle='#ffffff';x.font='bold 70px Arial';x.fillText('VALENCY QUIZ',90,190);
+ x.fillStyle='#a78bfa';x.font='bold 120px Arial';x.fillText(lastResult.pct+'%',90,365);
+ x.fillStyle='#ffffff';x.font='bold 34px Arial';x.fillText('ROUND '+lastResult.round+' COMPLETE',95,430);
+ const stats=[['CORRECT',lastResult.right],['INCORRECT',lastResult.wrong],['TOTAL',lastResult.total]];
+ stats.forEach((s,i)=>{let xx=95+i*350;x.fillStyle='#202d4e';x.beginPath();x.roundRect(xx,500,300,125,20);x.fill();x.fillStyle='#65e4f2';x.font='bold 22px Arial';x.fillText(s[0],xx+24,545);x.fillStyle='#fff';x.font='bold 42px Arial';x.fillText(String(s[1]),xx+24,600)});
+ x.fillStyle='#b8c4df';x.font='22px Arial';x.fillText('Keep learning. Keep improving.',95,690);
+ let a=document.createElement('a');a.download='valency-quiz-result.png';a.href=c.toDataURL('image/png');a.click();
+}
+$('nextBtn').addEventListener('click',next);$('againBtn').addEventListener('click',()=>{round++;startRound()});$('downloadBtn').addEventListener('click',downloadResult);
 
-      <label class="field-label" for="performanceSelect">Performance priority</label>
-      <div class="select-wrap"><select id="performanceSelect">
-        <option value="smooth">Smooth gameplay</option>
-        <option value="balanced" selected>Balanced performance</option>
-        <option value="responsive">Fast response</option>
-      </select><span>⌄</span></div>
-    </section>
+const chartElements = [
+ ["Hydrogen","H",1,1],["Helium","He",2,0],["Lithium","Li",3,1],["Beryllium","Be",4,2],
+ ["Boron","B",5,3],["Carbon","C",6,4],["Nitrogen","N",7,3,5],["Oxygen","O",8,2],
+ ["Fluorine","F",9,1],["Neon","Ne",10,0],["Sodium","Na",11,1],["Magnesium","Mg",12,2],
+ ["Aluminium","Al",13,3],["Silicon","Si",14,4],["Phosphorus","P",15,3,5],["Sulphur","S",16,2,4,6],
+ ["Chlorine","Cl",17,1,3,5,7],["Argon","Ar",18,0],["Potassium","K",19,1],["Calcium","Ca",20,2],
+ ["Scandium","Sc",21,3],["Titanium","Ti",22,3,4],["Vanadium","V",23,2,3,4,5],["Chromium","Cr",24,2,3,6],
+ ["Manganese","Mn",25,2,4,7],["Iron","Fe",26,2,3],["Cobalt","Co",27,2,3],["Nickel","Ni",28,2,3],
+ ["Copper","Cu",29,1,2],["Zinc","Zn",30,2],["Gallium","Ga",31,3],["Germanium","Ge",32,2,4],
+ ["Arsenic","As",33,3,5],["Selenium","Se",34,2,4,6],["Bromine","Br",35,1,3,5,7],["Krypton","Kr",36,0],
+ ["Rubidium","Rb",37,1],["Strontium","Sr",38,2],["Silver","Ag",47,1],["Cadmium","Cd",48,2],
+ ["Tin","Sn",50,2,4],["Iodine","I",53,1,3,5,7],["Barium","Ba",56,2],["Caesium","Cs",55,1],["Gold","Au",79,1,3],
+ ["Mercury","Hg",80,1,2],["Lead","Pb",82,2,4],["Bismuth","Bi",83,3,5],["Platinum","Pt",78,2,4],["Osmium","Os",76,2,3,4,6,8]
+];
+function downloadValencyChart(){
+ const canvas=document.createElement('canvas');canvas.width=1600;canvas.height=2200;
+ const ctx=canvas.getContext('2d');
+ const bg=ctx.createLinearGradient(0,0,1600,2200);bg.addColorStop(0,'#101a38');bg.addColorStop(1,'#251d49');
+ ctx.fillStyle=bg;ctx.fillRect(0,0,1600,2200);
+ ctx.fillStyle='#65e4f2';ctx.font='bold 34px Arial';ctx.fillText('CLASS 10 • CHEMISTRY REVISION',90,95);
+ ctx.fillStyle='#ffffff';ctx.font='bold 76px Arial';ctx.fillText('IMPORTANT ELEMENTS',90,190);
+ ctx.fillStyle='#b9c6e5';ctx.font='28px Arial';ctx.fillText('Atomic number • Symbol • Common school-level valency',92,245);
+ const unique=[];const seen=new Set();
+ for(const item of chartElements){if(!seen.has(item[1])){seen.add(item[1]);unique.push(item)}}
+ const cols=2, colW=700, rowH=67, startY=330;
+ unique.forEach((e,i)=>{
+   const col=i%cols,row=Math.floor(i/cols),x=90+col*720,y=startY+row*rowH;
+   ctx.fillStyle=row%2===0?'#202d4e':'#182440';ctx.beginPath();ctx.roundRect(x,y,colW,rowH-7,12);ctx.fill();
+   ctx.fillStyle='#65e4f2';ctx.font='bold 22px Arial';ctx.fillText(String(e[2]).padStart(2,'0'),x+18,y+39);
+   ctx.fillStyle='#ffffff';ctx.font='bold 25px Arial';ctx.fillText(e[1],x+95,y+39);
+   ctx.font='22px Arial';ctx.fillText(e[0],x+180,y+39);
+   ctx.fillStyle='#c8b8ff';ctx.font='bold 22px Arial';ctx.textAlign='right';
+   ctx.fillText(e.slice(3).join(', '),x+colW-20,y+39);ctx.textAlign='left';
+ });
+ const bottom=startY+Math.ceil(unique.length/cols)*rowH+28;
+ ctx.fillStyle='#aab5d1';ctx.font='21px Arial';
+ ctx.fillText('Valency can vary by compound. Values shown are common school-level valencies.',90,bottom);
+ ctx.fillText('Noble gases are generally assigned valency 0.',90,bottom+36);
+ ctx.fillStyle='#65e4f2';ctx.font='bold 22px Arial';ctx.fillText('VALENCY QUIZ • KEEP PRACTISING',90,2125);
+ const link=document.createElement('a');link.download='class-10-important-elements-valency-chart.png';
+ link.href=canvas.toDataURL('image/png');link.click();
+}
+document.getElementById('chartBtn').addEventListener('click',downloadValencyChart);
 
-    <section class="generate-area">
-      <div class="generate-note"><span class="pulse-dot"></span><span>20-SECOND PROFILE ANALYSIS</span></div>
-      <button id="generateBtn" class="generate-btn"><span id="generateText">GENERATE SENSITIVITY</span><span class="btn-arrow">↗</span></button>
-      <div class="progress-wrap hidden" id="progressWrap">
-        <div class="progress-top"><span id="progressLabel">Analyzing device profile…</span><strong id="progressPercent">0%</strong></div>
-        <div class="progress-track"><div id="progressBar"></div></div>
-        <p>Using available browser hints and your selected play style. This is an estimate, not a live FPS benchmark.</p>
-      </div>
-    </section>
-
-    <section id="results" class="panel results hidden" aria-live="polite">
-      <div class="result-head"><div><span class="step">03</span><h3>YOUR SENSITIVITY PROFILE</h3></div><span class="result-tag">GENERATED</span></div>
-      <div class="result-summary"><div><span class="summary-label">PROFILE</span><strong id="resultStyle">One-tap</strong></div><div><span class="summary-label">RANGE</span><strong id="resultRange">0–100</strong></div><div><span class="summary-label">DEVICE FIT</span><strong id="resultFit">Balanced</strong></div></div>
-      <div id="sensitivityRows" class="sensitivity-list"></div>
-      <div class="result-actions"><button id="copyBtn" class="secondary-btn">▣ Copy settings</button><button id="againBtn" class="outline-btn">Regenerate</button></div>
-      <p class="footnote">Starting-point suggestions only. Test in Training Ground and adjust gradually to your HUD, DPI, touch response, and personal control.</p>
-    </section>
-
-    <footer><span>CRAFT X GAMER</span><span>UNOFFICIAL FAN TOOL · NOT AFFILIATED WITH GARENA</span></footer>
-  </main>
-  <div id="toast" class="toast" role="status"></div>
-  <script src="app.js"></script>
+startRound();
+</script>
 </body>
 </html>
