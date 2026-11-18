@@ -3,256 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10152b">
-<title>Valency Quiz | Class 10 Practice</title>
+<meta name="theme-color" content="#101827">
+<title>Valency Lab | Class 10 Chemistry</title>
 <style>
-:root{--bg:#0b1020;--panel:#151d36;--panel2:#1b2745;--text:#f4f7ff;--muted:#aab5d1;--cyan:#65e4f2;--purple:#a78bfa;--green:#4ade80;--red:#fb7185}
-*{box-sizing:border-box}html{width:100%;overflow-x:hidden}body{margin:0;min-height:100svh;width:100%;overflow-x:hidden;padding-bottom:112px;background:radial-gradient(ellipse at 15% 0%,#26345f 0,transparent 38%),radial-gradient(ellipse at 100% 90%,#34265c 0,transparent 35%),var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;padding:22px}
-.wrap{width:min(100%,850px);margin:0 auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}.brand{font-size:13px;color:var(--cyan);letter-spacing:2px;font-weight:800}.pill{border:1px solid #354365;border-radius:999px;padding:8px 12px;color:var(--muted);font-size:12px}
-h1{font-size:clamp(32px,7vw,54px);line-height:1.05;margin:8px 0 10px;letter-spacing:-1.8px}.grad{background:linear-gradient(90deg,var(--cyan),#b7a0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{color:var(--muted);margin:0 0 22px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.stat,.card{background:linear-gradient(145deg,#1a2543,#121a31);border:1px solid #2b395d;border-radius:18px}.stat{padding:13px 15px}.stat small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px}.stat strong{font-size:23px;display:block;margin-top:3px}.progress{height:8px;background:#273452;border-radius:20px;overflow:hidden;margin:12px 0 22px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:width .4s ease}
-.card{padding:clamp(20px,5vw,34px);box-shadow:0 18px 60px #0004;animation:rise .4s ease}.roundline{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px;margin-bottom:20px}.qtag{color:var(--cyan);font-weight:800;letter-spacing:1.5px;font-size:12px}.question{font-size:clamp(23px,4vw,32px);font-weight:750;line-height:1.25;margin:10px 0 8px}.hint{color:var(--muted);font-size:14px;margin:0 0 22px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice{background:#202d4e;color:var(--text);border:1px solid #3a4b72;border-radius:14px;padding:17px;text-align:left;font-size:17px;font-weight:700;cursor:pointer;transition:.2s;min-height:62px}.choice:hover:not(:disabled){transform:translateY(-3px);border-color:var(--cyan);background:#26385d}.choice:disabled{cursor:default;opacity:1}.choice.correct{border-color:var(--green);background:#123c36}.choice.wrong{border-color:var(--red);background:#482538}.choice span{color:var(--muted);font-size:12px;margin-right:10px}
-.feedback{display:none;margin-top:16px;padding:13px 15px;border-radius:12px;font-size:14px;line-height:1.5}.feedback.show{display:block;animation:rise .25s ease}.feedback.good{background:#123c36;color:#c7ffe0}.feedback.bad{background:#482538;color:#ffe0e7}.actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px}.btn{border:0;border-radius:12px;padding:13px 19px;font-size:14px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(100deg,var(--cyan),#a78bfa);color:#10152b}.secondary{background:#263452;color:var(--text);border:1px solid #3a4b72}.btn:disabled{opacity:.35;cursor:not-allowed}.setup{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px;color:var(--muted);font-size:13px}.setup select{background:#202d4e;color:white;border:1px solid #3a4b72;border-radius:10px;padding:9px}.hidden{display:none!important}
-.result{text-align:center}.medal{font-size:58px;margin:4px 0 8px}.score{font-size:clamp(45px,10vw,72px);font-weight:900;letter-spacing:-3px;background:linear-gradient(90deg,var(--cyan),#c4a8ff);-webkit-background-clip:text;color:transparent}.result h2{font-size:30px;margin:5px}.result p{color:var(--muted)}.resultgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.resultgrid div{padding:14px;background:#202d4e;border-radius:13px}.resultgrid strong{display:block;font-size:23px}.resultgrid small{color:var(--muted)}.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:18px}
-@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:560px){
- body{padding:10px}
- .top{margin-bottom:12px}
- h1{font-size:clamp(29px,9vw,40px);margin:5px 0 6px;letter-spacing:-1px}
- .sub{font-size:13px;line-height:1.4;margin-bottom:12px}
- .stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:12px 0 10px}
- .stat{padding:8px 6px;border-radius:12px;min-width:0}
- .stat small{font-size:9px;letter-spacing:.4px;white-space:nowrap}
- .stat strong{font-size:19px}
- .progress{margin:8px 0 12px;height:6px}
- .card{padding:15px;border-radius:15px}
- .roundline{font-size:11px;margin-bottom:13px}
- .question{font-size:clamp(20px,6vw,26px);margin:7px 0 5px}
- .hint{font-size:12px;margin-bottom:13px}
- .choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
- .choice{padding:12px 9px;min-height:48px;font-size:14px;border-radius:11px}
- .choice span{margin-right:5px;font-size:10px}
- .feedback{font-size:12px;padding:10px;margin-top:10px}
- .actions{margin-top:13px;gap:8px;align-items:center}
- .actions .btn{flex:0 1 auto;padding:11px 13px;font-size:12px}
- #liveScore{font-size:11px!important}
- .setup{margin-top:12px;font-size:11px;gap:8px}
- .setup select{padding:7px}
- .resultgrid{gap:7px;margin:15px 0}
- .resultgrid div{padding:10px 5px}
- .resultgrid strong{font-size:19px}
- .resultgrid small{font-size:10px}
- .result h2{font-size:24px}
- .score{font-size:56px}
-}
-@media(max-height:700px) and (max-width:560px){
- body{padding-top:7px;padding-bottom:7px}
- .top{margin-bottom:7px}
- .brand{font-size:10px}
- .pill{font-size:9px;padding:6px 8px}
- h1{font-size:29px}
- .sub{margin-bottom:8px}
- .stats{margin:8px 0}
- .card{padding:12px}
- .roundline{margin-bottom:9px}
- .hint{margin-bottom:9px}
- .choice{min-height:42px;padding:9px 7px}
- .actions{margin-top:9px}
- .setup{margin-top:8px}
-}
+:root{--bg:#0b1220;--panel:#131f33;--panel2:#1a2941;--text:#edf4ff;--muted:#a9b8ce;--accent:#69e0c1;--blue:#80aaff;--good:#35c98b;--bad:#ff7272;--line:#2b3d58}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#203b5b 0,transparent 34%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:28px 18px 20px;max-width:1050px;margin:auto} .tag{color:var(--accent);font-weight:800;letter-spacing:.13em;font-size:.75rem}
+h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.08;margin:8px 0}header p{color:var(--muted);max-width:680px;margin:10px 0 0}
+main{max-width:1050px;margin:auto;padding:0 16px 50px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
+button,.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:11px 15px;border-radius:12px;font-weight:700;cursor:pointer}
+button.active,.primary{background:var(--accent);color:#092019;border-color:var(--accent)}button:disabled{opacity:.45;cursor:not-allowed}
+.panel{background:linear-gradient(145deg,#17263d,#111c2e);border:1px solid var(--line);border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 12px 30px #0002}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#0e192a;border:1px solid var(--line);border-radius:13px;padding:12px}.stat b{display:block;font-size:1.35rem;color:var(--accent)}.stat span{font-size:.8rem;color:var(--muted)}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}input,select{background:#0c1727;color:var(--text);border:1px solid var(--line);padding:12px;border-radius:11px;font:inherit;min-width:0}input{flex:1;min-width:180px}
+.tablewrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}table{border-collapse:collapse;width:100%;min-width:570px;background:#0e192a}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}th{color:var(--accent);font-size:.85rem;background:#17263d}td small{color:var(--muted)}.symbol{font-size:1.1rem;font-weight:900;color:var(--blue)}
+.question{font-size:clamp(1.15rem,3vw,1.5rem);font-weight:800;margin:12px 0 18px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{text-align:left;min-height:52px}.choice.correct{border-color:var(--good);background:#12382f}.choice.wrong{border-color:var(--bad);background:#3b2028}
+.feedback{padding:12px;border-radius:12px;margin-top:12px;background:#0d1929;color:var(--muted)}.feedback.good{border:1px solid var(--good);color:#a9f2d5}.feedback.bad{border:1px solid var(--bad);color:#ffc0c0}
+.progress{height:8px;background:#26364d;border-radius:99px;overflow:hidden;margin:14px 0}.progress div{height:100%;background:var(--accent);width:0;transition:width .2s}
+.hidden{display:none!important}.muted{color:var(--muted)}.pill{display:inline-block;background:#203550;color:#b9d0f4;padding:4px 9px;border-radius:99px;font-size:.78rem;margin:3px}
+footer{text-align:center;color:var(--muted);padding:20px;font-size:.85rem}
+@media(max-width:600px){.stats{grid-template-columns:repeat(3,1fr)}.stat{padding:9px}.choices{grid-template-columns:1fr}.panel{padding:14px}}
 
-.download-dock{
- position:fixed;z-index:20;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
- background:linear-gradient(180deg,transparent 0%,rgba(9,14,29,.92) 22%,#0b1020 100%);
- display:flex;justify-content:center;pointer-events:none
-}
-.chart-cta{
- pointer-events:auto;width:min(100%,820px);min-height:76px;border:1px solid rgba(101,228,242,.65);
- border-radius:20px;padding:13px 18px;display:flex;align-items:center;gap:14px;text-align:left;
- color:#10152b;background:linear-gradient(105deg,#65e4f2,#b7a0ff);cursor:pointer;
- box-shadow:0 0 0 0 rgba(101,228,242,.45),0 12px 35px #0008;
- animation:ctaPulse 2.2s infinite
-}
-.chart-cta strong{display:block;font-size:17px;line-height:1.2}
-.chart-cta small{display:block;font-size:11px;margin-top:4px;opacity:.78}
-.cta-icon{font-size:27px;font-weight:900;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:#ffffff70}
-.cta-arrow{margin-left:auto;font-size:25px;font-weight:900}
-@keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(101,228,242,.35),0 12px 35px #0008;transform:translateY(0)}50%{box-shadow:0 0 0 8px rgba(101,228,242,0),0 15px 38px #0009;transform:translateY(-2px)}}
-@media(max-width:560px){
- body{padding-bottom:100px}
- .download-dock{padding:8px 10px calc(9px + env(safe-area-inset-bottom))}
- .chart-cta{min-height:72px;padding:11px 13px;border-radius:17px;gap:10px}
- .chart-cta strong{font-size:15px}
- .chart-cta small{font-size:10px}
- .cta-icon{width:36px;height:36px;font-size:23px}
-}
+.topbar{padding:18px 20px 0;max-width:1100px;margin:auto}
+.topbar .tag{font-size:.78rem;letter-spacing:.22em}
+.home-screen{min-height:calc(100svh - 55px);display:grid;place-items:center;padding:20px;overflow:hidden;position:relative}
+.home-center{position:relative;text-align:center;width:min(100%,620px);padding:45px 20px;z-index:1}
+.home-kicker{color:var(--accent);font-weight:800;letter-spacing:.18em;font-size:.76rem}
+.home-center h1{font-size:clamp(3.2rem,12vw,6.4rem);line-height:.98;letter-spacing:-.055em;margin:16px 0}
+.home-center h1 span{color:var(--accent);text-shadow:0 0 35px #69e0c155}
+.home-sub{color:var(--muted);font-size:1rem;margin:0 0 28px}
+.home-actions{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.start-hero{position:relative;display:flex;align-items:center;justify-content:center;gap:22px;min-width:min(290px,82vw);padding:20px 27px;border:0;border-radius:18px;background:linear-gradient(110deg,#69e0c1,#9df4d9);color:#082019;font-size:1.1rem;letter-spacing:.1em;box-shadow:0 0 0 0 #69e0c166;animation:pulseStart 2s infinite;transition:transform .2s}
+.start-hero:hover{transform:translateY(-4px) scale(1.025)}.start-hero b{font-size:1.55rem}
+@keyframes pulseStart{0%{box-shadow:0 0 0 0 #69e0c166,0 12px 35px #0005}70%{box-shadow:0 0 0 18px #69e0c100,0 12px 35px #0005}100%{box-shadow:0 0 0 0 #69e0c100,0 12px 35px #0005}}
+.list-side{font-size:.88rem;padding:12px 15px;border-radius:13px;background:#16263b;border-color:#38506e;color:#dceaff}.list-side span{color:var(--accent);margin-left:8px}
+.orbit{position:absolute;border:1px solid #69e0c11b;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
+.orbit-one{width:min(88vw,580px);aspect-ratio:1}.orbit-two{width:min(110vw,760px);aspect-ratio:1;border-style:dashed;animation:spinOrbit 55s linear infinite}
+@keyframes spinOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.download-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#173c3a;color:#a9f2d5;border:1px solid #287a67;border-radius:11px;padding:10px 13px;font-weight:800;font-size:.85rem}
+.valency-main{color:#9af0d3;font-weight:900;background:#153b34;padding:3px 8px;border-radius:7px;display:inline-block;margin-right:5px}
+.valency-extra{color:#d9e5f5;background:#27364c;padding:3px 7px;border-radius:7px;display:inline-block;margin:2px}
+.bottom-info{max-width:900px;margin:20px auto 0;padding:20px 22px 36px;color:var(--muted);text-align:center;font-size:.88rem}
+.bottom-info strong{color:#dceaff}
+#appMain{padding-top:10px}
+@media(max-width:560px){.home-center{padding:25px 10px}.home-actions{gap:10px}.start-hero{width:100%;max-width:340px}.list-side{width:auto}.topbar{padding-top:15px}}
 
 </style>
 </head>
 <body>
+<header class="topbar"><div class="tag">PRACTICE TIME</div></header>
+<section id="homeScreen" class="home-screen">
+ <div class="home-center">
+  <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+  <div class="home-kicker">CLASS 10 • CHEMISTRY</div>
+  <h1>Ready to<br><span>practice?</span></h1>
+  <p class="home-sub">Test your element and valency knowledge.</p>
+  <div class="home-actions">
+   <button class="start-hero" id="heroStart"><span>START QUIZ</span><b>→</b></button>
+   <button class="list-side" id="heroList">Valency list <span>↗</span></button>
+  </div>
+ </div>
+</section>
+<main id="appMain" class="hidden">
+ <div class="stats">
+  <div class="stat"><b id="totalCount">30+</b><span>Elements to revise</span></div>
+  <div class="stat"><b id="scoreTop">0</b><span>Correct answers</span></div>
+  <div class="stat"><b id="streakTop">0</b><span>Current streak</span></div>
+ </div>
+ <nav class="tabs">
+  <button class="active" data-tab="learn">Element list</button>
+  <button data-tab="quiz">Quiz practice</button>
+  <button data-tab="tips">Valency guide</button>
+ </nav>
 
-<div class="download-dock">
-  <button id="chartBtn" class="chart-cta">
-    <span class="cta-icon">⬇</span>
-    <span><strong>Download Elements Chart</strong><small>Atomic numbers • Symbols • Common valencies</small></span>
-    <span class="cta-arrow">↗</span>
-  </button>
-</div>
+ <section id="learn" class="tabcontent">
+  <div class="panel">
+   <h2>Element valency chart</h2>
+   <p class="muted">Search by element name, symbol, or atomic number. A slash shows common variable valencies.</p>
+   <div class="controls">
+    <a class="download-link" href="Valency_list.png" download="Valency_list.png">↓ Download Valency_list.png</a>
+    <input id="search" placeholder="Search: iron, Fe, 26…" aria-label="Search elements">
+    <select id="groupFilter" aria-label="Filter elements">
+     <option value="all">All elements</option><option value="first30">First 30 elements</option><option value="extra">Extra syllabus elements</option><option value="variable">Variable valency</option>
+    </select>
+   </div>
+   <div class="tablewrap"><table><thead><tr><th>Atomic no.</th><th>Element</th><th>Symbol</th><th>Common valency</th></tr></thead><tbody id="elementRows"></tbody></table></div>
+   <p class="muted" id="rowCount"></p>
+  </div>
+ </section>
 
-<div class="wrap">
-  <div class="top"><div class="brand">⚗ SCIENCE • CLASS 10</div><div class="pill">NCERT EXAM PRACTICE</div></div>
-  <h1><span class="grad">Valency</span> Quiz</h1>
-  <p class="sub">Master the common valencies of elements. One question at a time, shuffled every round.</p>
+ <section id="quiz" class="tabcontent hidden">
+  <div class="panel">
+   <div class="controls">
+    <select id="quizMode"><option value="mixed">Mixed quiz</option><option value="symbol">Name the symbol</option><option value="valency">Find the valency</option><option value="name">Name the element</option><option value="number">Atomic number</option></select>
+    <select id="quizSize"><option value="10">10 questions</option><option value="15">15 questions</option><option value="20">20 questions</option></select>
+    <button class="primary" id="startBtn">Start / Restart</button>
+   </div>
+   <div class="progress"><div id="progressBar"></div></div>
+   <div class="muted" id="questionMeta">Press Start to begin.</div>
+   <div class="question" id="questionText">Ready to test your valency knowledge?</div>
+   <div class="choices" id="choices"></div>
+   <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+   <div class="controls"><button id="nextBtn" class="primary" disabled>Next question →</button></div>
+   <div id="result" class="hidden"></div>
+  </div>
+ </section>
 
-  <section id="quizArea">
-    <div class="stats">
-      <div class="stat"><small>Total</small><strong id="total">45</strong></div>
-      <div class="stat"><small>Remaining</small><strong id="remaining">45</strong></div>
-      <div class="stat"><small>Correct</small><strong id="correct">0</strong></div>
-      <div class="stat"><small>Incorrect</small><strong id="incorrect">0</strong></div>
-    </div>
-    <div class="progress"><div class="bar" id="bar"></div></div>
-    <div class="card" id="questionCard">
-      <div class="roundline"><span id="roundLabel">ROUND 1</span><span id="counter">QUESTION 1 / 45</span></div>
-      <div class="qtag">IDENTIFY THE VALENCY</div>
-      <div class="question" id="question">What is the common valency of Hydrogen (H)?</div>
-      <p class="hint">Choose the correct valency from the options below.</p>
-      <div class="choices" id="choices"></div>
-      <div class="feedback" id="feedback" aria-live="polite"></div>
-      <div class="actions"><span id="liveScore" style="color:var(--muted);font-size:13px">Take your time. You’ve got this!</span><button class="btn primary" id="nextBtn" disabled>Next question →</button></div>
-    </div>
-    <div class="setup"><label for="count">Questions per round:</label><select id="count"><option value="40">40 questions</option><option value="45" selected>45 questions</option><option value="50">50 questions (all)</option></select><span>50 unique elements; no repeats within a round.</span></div>
-  </section>
-
-  <section id="resultArea" class="card result hidden">
-    <div class="medal" id="medal">🏆</div>
-    <div class="qtag">ROUND COMPLETE</div>
-    <h2 id="resultTitle">Excellent work!</h2>
-    <div class="score" id="scoreText">0%</div>
-    <p id="resultMessage">Your practice result</p>
-    <div class="resultgrid">
-      <div><strong id="rCorrect">0</strong><small>Correct</small></div>
-      <div><strong id="rWrong">0</strong><small>Incorrect</small></div>
-      <div><strong id="rTotal">45</strong><small>Total questions</small></div>
-    </div>
-    <button class="btn primary" id="downloadBtn">⬇ Download result image</button>
-    <button class="btn secondary" id="againBtn" style="margin-left:7px">Start next random round ↻</button>
-    <p class="note">Your result image is generated in your browser. The next round reshuffles the element list, so the order will be different.</p>
-  </section>
-</div>
+ <section id="tips" class="tabcontent hidden">
+  <div class="panel">
+   <h2>Quick valency guide</h2>
+   <p>Valency is the combining capacity of an atom. For many main-group elements, the valency can be understood from the number of electrons an atom loses, gains, or shares to complete its outer shell.</p>
+   <div class="pill">Group 1 → 1</div><div class="pill">Group 2 → 2</div><div class="pill">Group 13 → 3</div><div class="pill">Group 14 → 4 (common)</div><div class="pill">Group 15 → 3 (common)</div><div class="pill">Group 16 → 2 (common)</div><div class="pill">Group 17 → 1 (common)</div><div class="pill">Group 18 → 0</div>
+   <h3>Remember these variable valencies</h3>
+   <p><b>Iron (Fe):</b> 2, 3 &nbsp; <b>Copper (Cu):</b> 1, 2 &nbsp; <b>Mercury (Hg):</b> 1, 2</p>
+   <p><b>Tin (Sn):</b> 2, 4 &nbsp; <b>Lead (Pb):</b> 2, 4 &nbsp; <b>Chromium (Cr):</b> 2, 3, 6</p>
+   <p class="muted">Important: Valency can depend on the compound. These are common school-level values for revision, not every oxidation state an element can show.</p>
+  </div>
+  <div class="panel">
+   <h3>Formula-writing reminder</h3>
+   <p>For a simple ionic compound, write the symbols, note their valencies, then criss-cross the numbers as subscripts and simplify if possible.</p>
+   <p><b>Example:</b> Magnesium (2) + Chlorine (1) → MgCl₂</p>
+   <p><b>Example:</b> Aluminium (3) + Oxygen (2) → Al₂O₃</p>
+  </div>
+ </section>
+</main>
+<footer class="bottom-info"><strong>About this practice</strong><br>Revise the first 30 elements, their symbols, atomic numbers and common school-level valencies. Use the searchable list for quick revision and the quiz to check your progress. Where more than one common valency is shown, the first value is highlighted and the remaining values are shown beside it. Valency may vary with the compound.</footer>
 <script>
 const elements = [
- ["Hydrogen","H",1],["Lithium","Li",1],["Sodium","Na",1],["Potassium","K",1],["Rubidium","Rb",1],
- ["Caesium","Cs",1],["Silver","Ag",1],["Fluorine","F",1],["Chlorine","Cl",1],["Bromine","Br",1],
- ["Iodine","I",1],["Beryllium","Be",2],["Magnesium","Mg",2],["Calcium","Ca",2],["Strontium","Sr",2],
- ["Barium","Ba",2],["Zinc","Zn",2],["Cadmium","Cd",2],["Oxygen","O",2],["Sulphur","S",2],
- ["Iron","Fe",2],["Copper","Cu",2],["Nickel","Ni",2],["Cobalt","Co",2],["Manganese","Mn",2],
- ["Aluminium","Al",3],["Boron","B",3],["Nitrogen","N",3],["Phosphorus","P",3],["Gallium","Ga",3],
- ["Scandium","Sc",3],["Yttrium","Y",3],["Bismuth","Bi",3],["Carbon","C",4],["Silicon","Si",4],
- ["Germanium","Ge",4],["Tin","Sn",4],["Lead","Pb",2],["Titanium","Ti",4],["Zirconium","Zr",4],
- ["Gold","Au",3],["Chromium","Cr",3],["Vanadium","V",5],["Phosphorus","P",5],["Antimony","Sb",3],
- ["Selenium","Se",2],["Tellurium","Te",2],["Helium","He",0],["Neon","Ne",0],["Argon","Ar",0]
+[1,"Hydrogen","H","1","first30"],[2,"Helium","He","0","first30"],[3,"Lithium","Li","1","first30"],[4,"Beryllium","Be","2","first30"],[5,"Boron","B","3","first30"],[6,"Carbon","C","4","first30"],[7,"Nitrogen","N","3, 5","first30"],[8,"Oxygen","O","2","first30"],[9,"Fluorine","F","1","first30"],[10,"Neon","Ne","0","first30"],
+[11,"Sodium","Na","1","first30"],[12,"Magnesium","Mg","2","first30"],[13,"Aluminium","Al","3","first30"],[14,"Silicon","Si","4","first30"],[15,"Phosphorus","P","3, 5","first30"],[16,"Sulfur","S","2, 4, 6","first30"],[17,"Chlorine","Cl","1, 3, 5, 7","first30"],[18,"Argon","Ar","0","first30"],[19,"Potassium","K","1","first30"],[20,"Calcium","Ca","2","first30"],
+[21,"Scandium","Sc","3","first30"],[22,"Titanium","Ti","3, 4","first30"],[23,"Vanadium","V","3, 4, 5","first30"],[24,"Chromium","Cr","2, 3, 6","first30"],[25,"Manganese","Mn","2, 4, 7","first30"],[26,"Iron","Fe","2, 3","first30"],[27,"Cobalt","Co","2, 3","first30"],[28,"Nickel","Ni","2","first30"],[29,"Copper","Cu","1, 2","first30"],[30,"Zinc","Zn","2","first30"],
+[33,"Arsenic","As","3, 5","extra"],[35,"Bromine","Br","1, 3, 5, 7","extra"],[47,"Silver","Ag","1","extra"],[48,"Cadmium","Cd","2","extra"],[50,"Tin","Sn","2, 4","extra"],[53,"Iodine","I","1, 3, 5, 7","extra"],[56,"Barium","Ba","2","extra"],[74,"Tungsten","W","6","extra"],[78,"Platinum","Pt","2, 4","extra"],[79,"Gold","Au","1, 3","extra"],[80,"Mercury","Hg","1, 2","extra"],[82,"Lead","Pb","2, 4","extra"],[83,"Bismuth","Bi","3, 5","extra"],[32,"Germanium","Ge","2, 4","extra"],[31,"Gallium","Ga","3","extra"]
 ];
-// One commonly taught valency is used per element in this practice set; some elements can show other valencies in different compounds.
-const values=[0,1,2,3,4,5,6,7];
-let round=1, deck=[], index=0, right=0, wrong=0, answered=false, roundTotal=45, lastResult=null;
+const variable = e => e[3].includes(",");
+const rows=document.getElementById("elementRows"), search=document.getElementById("search"), filter=document.getElementById("groupFilter");
+function renderRows(){
+ const q=search.value.toLowerCase().trim(), f=filter.value;
+ const found=elements.filter(e=>(f==="all"||(f==="variable"?variable(e):e[4]===f))&&(!q||[e[0],e[1],e[2],e[3]].some(v=>String(v).toLowerCase().includes(q))));
+ rows.innerHTML=found.map(e=>{const vals=e[3].split(",").map(v=>v.trim());const valHTML=vals.map((v,i)=>`<span class="${i===0?'valency-main':'valency-extra'}">${v}</span>`).join("");return `<tr><td>${e[0]}</td><td>${e[1]}</td><td class="symbol">${e[2]}</td><td>${valHTML}</td></tr>`}).join("");
+ document.getElementById("rowCount").textContent=`Showing ${found.length} of ${elements.length} elements`;
+}
+search.addEventListener("input",renderRows);filter.addEventListener("change",renderRows);renderRows();
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("active",x===b));
+ document.querySelectorAll(".tabcontent").forEach(x=>x.classList.toggle("hidden",x.id!==b.dataset.tab));
+}));
+let questions=[],index=0,score=0,streak=0,locked=false;
 const $=id=>document.getElementById(id);
-function shuffle(a){let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-function startRound(){
- roundTotal=Number($('count').value); deck=shuffle(elements).slice(0,roundTotal); index=0;right=0;wrong=0;answered=false;
- $('quizArea').classList.remove('hidden');$('resultArea').classList.add('hidden');
- $('total').textContent=roundTotal;$('remaining').textContent=roundTotal;$('correct').textContent='0';$('incorrect').textContent='0';
- $('roundLabel').textContent='ROUND '+round;$('nextBtn').textContent='Next question →';renderQuestion();
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function makeQuestion(e,mode){
+ const others=shuffle(elements.filter(x=>x!==e));
+ let prompt,answer;
+ if(mode==="symbol"){prompt=`What is the symbol of ${e[1]}?`;answer=e[2]}
+ else if(mode==="name"){prompt=`Which element has the symbol ${e[2]}?`;answer=e[1]}
+ else if(mode==="number"){prompt=`What is the atomic number of ${e[1]} (${e[2]})?`;answer=String(e[0])}
+ else {prompt=`What is the common valency of ${e[1]} (${e[2]})?`;answer=e[3]}
+ const pool=mode==="symbol"?others.map(x=>x[2]):mode==="name"?others.map(x=>x[1]):mode==="number"?others.map(x=>String(x[0])):others.map(x=>x[3]);
+ const opts=shuffle([answer,...pool.filter(x=>x!==answer).slice(0,3)]);
+ return {prompt,answer,opts,explain:`${e[1]} (${e[2]}) — common valency: ${e[3]}; atomic number: ${e[0]}.`};
 }
-function renderQuestion(){
- answered=false;const item=deck[index];$('counter').textContent=`QUESTION ${index+1} / ${roundTotal}`;
- $('question').textContent=`What is the common valency of ${item[0]} (${item[1]})?`;
- $('feedback').className='feedback';$('feedback').textContent='';$('nextBtn').disabled=true;
- $('liveScore').textContent='Choose one answer to continue.';
- $('bar').style.width=(index/roundTotal*100)+'%';
- let opts=shuffle([...new Set([item[2],...shuffle(values.filter(v=>v!==item[2])).slice(0,3)])]);
- $('choices').innerHTML='';
- opts.forEach((v,i)=>{let b=document.createElement('button');b.className='choice';b.innerHTML=`<span>${String.fromCharCode(65+i)}</span> Valency ${v}`;b.onclick=()=>choose(v,b);$('choices').appendChild(b)});
- $('remaining').textContent=roundTotal-index;
+function start(){
+ const mode=$("quizMode").value,n=Number($("quizSize").value), pool=shuffle(elements);
+ questions=Array.from({length:n},(_,i)=>makeQuestion(pool[i%pool.length],mode==="mixed"?["symbol","name","number","valency"][i%4]:mode));
+ index=0;score=0;streak=0;locked=false;$("scoreTop").textContent=score;$("streakTop").textContent=streak;$("result").classList.add("hidden");showQuestion();
 }
-function choose(value,button){
- if(answered)return;answered=true;const item=deck[index],correct=value===item[2];
- if(correct){right++;$('feedback').className='feedback show good';$('feedback').textContent=`✓ Correct! ${item[0]} (${item[1]}) has valency ${item[2]} in this question.`;button.classList.add('correct')}
- else{wrong++;$('feedback').className='feedback show bad';$('feedback').textContent=`Not quite. The expected answer is valency ${item[2]} for ${item[0]} (${item[1]}).`;button.classList.add('wrong');[...$('choices').children].forEach(b=>{if(b.textContent.includes('Valency '+item[2]))b.classList.add('correct')})}
- [...$('choices').children].forEach(b=>b.disabled=true);
- $('correct').textContent=right;$('incorrect').textContent=wrong;$('remaining').textContent=roundTotal-index-1;
- $('liveScore').textContent=`Correct: ${right}  •  Incorrect: ${wrong}`;
- $('nextBtn').disabled=false;$('nextBtn').textContent=index===roundTotal-1?'View result →':'Next question →';
- $('bar').style.width=((index+1)/roundTotal*100)+'%';
+function showQuestion(){
+ locked=false;const q=questions[index];$("questionMeta").textContent=`Question ${index+1} of ${questions.length} • Score ${score}`;$("questionText").textContent=q.prompt;
+ $("progressBar").style.width=`${index/questions.length*100}%`;$("feedback").className="feedback hidden";$("feedback").textContent="";$("nextBtn").disabled=true;
+ $("choices").innerHTML="";q.opts.forEach(opt=>{const b=document.createElement("button");b.className="choice";b.textContent=opt;b.addEventListener("click",()=>choose(opt,b));$("choices").appendChild(b)});
 }
-function next(){if(!answered)return;index++;if(index>=roundTotal)finish();else renderQuestion()}
-function finish(){
- $('quizArea').classList.add('hidden');$('resultArea').classList.remove('hidden');
- let pct=Math.round(right/roundTotal*100);lastResult={round,right,wrong,total:roundTotal,pct,date:new Date().toLocaleDateString()};
- $('scoreText').textContent=pct+'%';$('rCorrect').textContent=right;$('rWrong').textContent=wrong;$('rTotal').textContent=roundTotal;
- $('medal').textContent=pct>=90?'🏆':pct>=70?'🥇':pct>=50?'🎯':'📘';
- $('resultTitle').textContent=pct>=90?'Outstanding performance!':pct>=70?'Great work!':pct>=50?'Good effort!':'Keep practising!';
- $('resultMessage').textContent=`You answered ${right} out of ${roundTotal} questions correctly.`;
+function choose(opt,btn){
+ if(locked)return;locked=true;const q=questions[index],correct=opt===q.answer;
+ document.querySelectorAll(".choice").forEach(b=>{b.disabled=true;if(b.textContent===q.answer)b.classList.add("correct")});
+ const fb=$("feedback");fb.classList.remove("hidden");fb.classList.add(correct?"good":"bad");fb.textContent=(correct?"Correct! ":"Not quite. Correct answer: "+q.answer+". ")+q.explain;
+ if(correct){score++;streak++}else streak=0;
+ $("scoreTop").textContent=score;$("streakTop").textContent=streak;$("questionMeta").textContent=`Question ${index+1} of ${questions.length} • Score ${score}`;$("nextBtn").disabled=false;
 }
-function downloadResult(){
- if(!lastResult)return;const c=document.createElement('canvas');c.width=1200;c.height=760;const x=c.getContext('2d');
- let g=x.createLinearGradient(0,0,1200,760);g.addColorStop(0,'#101a38');g.addColorStop(1,'#39285e');x.fillStyle=g;x.fillRect(0,0,1200,760);
- x.fillStyle='#65e4f2';x.font='bold 28px Arial';x.fillText('CLASS 10 • SCIENCE PRACTICE',90,95);
- x.fillStyle='#ffffff';x.font='bold 70px Arial';x.fillText('VALENCY QUIZ',90,190);
- x.fillStyle='#a78bfa';x.font='bold 120px Arial';x.fillText(lastResult.pct+'%',90,365);
- x.fillStyle='#ffffff';x.font='bold 34px Arial';x.fillText('ROUND '+lastResult.round+' COMPLETE',95,430);
- const stats=[['CORRECT',lastResult.right],['INCORRECT',lastResult.wrong],['TOTAL',lastResult.total]];
- stats.forEach((s,i)=>{let xx=95+i*350;x.fillStyle='#202d4e';x.beginPath();x.roundRect(xx,500,300,125,20);x.fill();x.fillStyle='#65e4f2';x.font='bold 22px Arial';x.fillText(s[0],xx+24,545);x.fillStyle='#fff';x.font='bold 42px Arial';x.fillText(String(s[1]),xx+24,600)});
- x.fillStyle='#b8c4df';x.font='22px Arial';x.fillText('Keep learning. Keep improving.',95,690);
- let a=document.createElement('a');a.download='valency-quiz-result.png';a.href=c.toDataURL('image/png');a.click();
+$("startBtn").addEventListener("click",start);
+$("nextBtn").addEventListener("click",()=>{
+ if(index<questions.length-1){index++;showQuestion()}else{
+ $("progressBar").style.width="100%";$("questionText").textContent="Quiz completed!";$("choices").innerHTML="";$("feedback").classList.add("hidden");
+ $("result").classList.remove("hidden");const pct=Math.round(score/questions.length*100);
+ $("result").innerHTML=`<h2>Your score: ${score}/${questions.length} (${pct}%)</h2><p>${pct>=80?"Excellent revision! Keep it up.":pct>=50?"Good effort. Revise the missed elements and try again.":"Keep practising. Use the element chart, then restart the quiz."}</p><button class="primary" onclick="start()">Try another round</button>`;
+ $("questionMeta").textContent="Finished";$("nextBtn").disabled=true;
+ }
+});
+$("totalCount").textContent=elements.length;
+function openApp(tab){
+ $("homeScreen").classList.add("hidden");$("appMain").classList.remove("hidden");
+ document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+ document.querySelectorAll(".tabcontent").forEach(x=>x.classList.toggle("hidden",x.id!==tab));
+ window.scrollTo({top:0,behavior:"smooth"});
 }
-$('nextBtn').addEventListener('click',next);$('againBtn').addEventListener('click',()=>{round++;startRound()});$('downloadBtn').addEventListener('click',downloadResult);
-
-const chartElements = [
- ["Hydrogen","H",1,1],["Helium","He",2,0],["Lithium","Li",3,1],["Beryllium","Be",4,2],
- ["Boron","B",5,3],["Carbon","C",6,4],["Nitrogen","N",7,3,5],["Oxygen","O",8,2],
- ["Fluorine","F",9,1],["Neon","Ne",10,0],["Sodium","Na",11,1],["Magnesium","Mg",12,2],
- ["Aluminium","Al",13,3],["Silicon","Si",14,4],["Phosphorus","P",15,3,5],["Sulphur","S",16,2,4,6],
- ["Chlorine","Cl",17,1,3,5,7],["Argon","Ar",18,0],["Potassium","K",19,1],["Calcium","Ca",20,2],
- ["Scandium","Sc",21,3],["Titanium","Ti",22,3,4],["Vanadium","V",23,2,3,4,5],["Chromium","Cr",24,2,3,6],
- ["Manganese","Mn",25,2,4,7],["Iron","Fe",26,2,3],["Cobalt","Co",27,2,3],["Nickel","Ni",28,2,3],
- ["Copper","Cu",29,1,2],["Zinc","Zn",30,2],["Gallium","Ga",31,3],["Germanium","Ge",32,2,4],
- ["Arsenic","As",33,3,5],["Selenium","Se",34,2,4,6],["Bromine","Br",35,1,3,5,7],["Krypton","Kr",36,0],
- ["Rubidium","Rb",37,1],["Strontium","Sr",38,2],["Silver","Ag",47,1],["Cadmium","Cd",48,2],
- ["Tin","Sn",50,2,4],["Iodine","I",53,1,3,5,7],["Barium","Ba",56,2],["Caesium","Cs",55,1],["Gold","Au",79,1,3],
- ["Mercury","Hg",80,1,2],["Lead","Pb",82,2,4],["Bismuth","Bi",83,3,5],["Platinum","Pt",78,2,4],["Osmium","Os",76,2,3,4,6,8]
-];
-function downloadValencyChart(){
- const canvas=document.createElement('canvas');canvas.width=1600;canvas.height=2200;
- const ctx=canvas.getContext('2d');
- const bg=ctx.createLinearGradient(0,0,1600,2200);bg.addColorStop(0,'#101a38');bg.addColorStop(1,'#251d49');
- ctx.fillStyle=bg;ctx.fillRect(0,0,1600,2200);
- ctx.fillStyle='#65e4f2';ctx.font='bold 34px Arial';ctx.fillText('CLASS 10 • CHEMISTRY REVISION',90,95);
- ctx.fillStyle='#ffffff';ctx.font='bold 76px Arial';ctx.fillText('IMPORTANT ELEMENTS',90,190);
- ctx.fillStyle='#b9c6e5';ctx.font='28px Arial';ctx.fillText('Atomic number • Symbol • Common school-level valency',92,245);
- const unique=[];const seen=new Set();
- for(const item of chartElements){if(!seen.has(item[1])){seen.add(item[1]);unique.push(item)}}
- const cols=2, colW=700, rowH=67, startY=330;
- unique.forEach((e,i)=>{
-   const col=i%cols,row=Math.floor(i/cols),x=90+col*720,y=startY+row*rowH;
-   ctx.fillStyle=row%2===0?'#202d4e':'#182440';ctx.beginPath();ctx.roundRect(x,y,colW,rowH-7,12);ctx.fill();
-   ctx.fillStyle='#65e4f2';ctx.font='bold 22px Arial';ctx.fillText(String(e[2]).padStart(2,'0'),x+18,y+39);
-   ctx.fillStyle='#ffffff';ctx.font='bold 25px Arial';ctx.fillText(e[1],x+95,y+39);
-   ctx.font='22px Arial';ctx.fillText(e[0],x+180,y+39);
-   ctx.fillStyle='#c8b8ff';ctx.font='bold 22px Arial';ctx.textAlign='right';
-   ctx.fillText(e.slice(3).join(', '),x+colW-20,y+39);ctx.textAlign='left';
- });
- const bottom=startY+Math.ceil(unique.length/cols)*rowH+28;
- ctx.fillStyle='#aab5d1';ctx.font='21px Arial';
- ctx.fillText('Valency can vary by compound. Values shown are common school-level valencies.',90,bottom);
- ctx.fillText('Noble gases are generally assigned valency 0.',90,bottom+36);
- ctx.fillStyle='#65e4f2';ctx.font='bold 22px Arial';ctx.fillText('VALENCY QUIZ • KEEP PRACTISING',90,2125);
- const link=document.createElement('a');link.download='class-10-important-elements-valency-chart.png';
- link.href=canvas.toDataURL('image/png');link.click();
-}
-document.getElementById('chartBtn').addEventListener('click',downloadValencyChart);
-
-startRound();
+$("heroStart").addEventListener("click",()=>{openApp("quiz");start()});
+$("heroList").addEventListener("click",()=>openApp("learn"));
 </script>
 </body>
 </html>
