@@ -1,202 +1,603 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101827">
-<title>Valency Lab | Class 10 Chemistry</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Paper.io - Territory Rush</title>
+
 <style>
-:root{--bg:#0b1220;--panel:#131f33;--panel2:#1a2941;--text:#edf4ff;--muted:#a9b8ce;--accent:#69e0c1;--blue:#80aaff;--good:#35c98b;--bad:#ff7272;--line:#2b3d58}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#203b5b 0,transparent 34%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
-header{padding:28px 18px 20px;max-width:1050px;margin:auto} .tag{color:var(--accent);font-weight:800;letter-spacing:.13em;font-size:.75rem}
-h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.08;margin:8px 0}header p{color:var(--muted);max-width:680px;margin:10px 0 0}
-main{max-width:1050px;margin:auto;padding:0 16px 50px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
-button,.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:11px 15px;border-radius:12px;font-weight:700;cursor:pointer}
-button.active,.primary{background:var(--accent);color:#092019;border-color:var(--accent)}button:disabled{opacity:.45;cursor:not-allowed}
-.panel{background:linear-gradient(145deg,#17263d,#111c2e);border:1px solid var(--line);border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 12px 30px #0002}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#0e192a;border:1px solid var(--line);border-radius:13px;padding:12px}.stat b{display:block;font-size:1.35rem;color:var(--accent)}.stat span{font-size:.8rem;color:var(--muted)}
-.controls{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}input,select{background:#0c1727;color:var(--text);border:1px solid var(--line);padding:12px;border-radius:11px;font:inherit;min-width:0}input{flex:1;min-width:180px}
-.tablewrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}table{border-collapse:collapse;width:100%;min-width:570px;background:#0e192a}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}th{color:var(--accent);font-size:.85rem;background:#17263d}td small{color:var(--muted)}.symbol{font-size:1.1rem;font-weight:900;color:var(--blue)}
-.question{font-size:clamp(1.15rem,3vw,1.5rem);font-weight:800;margin:12px 0 18px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{text-align:left;min-height:52px}.choice.correct{border-color:var(--good);background:#12382f}.choice.wrong{border-color:var(--bad);background:#3b2028}
-.feedback{padding:12px;border-radius:12px;margin-top:12px;background:#0d1929;color:var(--muted)}.feedback.good{border:1px solid var(--good);color:#a9f2d5}.feedback.bad{border:1px solid var(--bad);color:#ffc0c0}
-.progress{height:8px;background:#26364d;border-radius:99px;overflow:hidden;margin:14px 0}.progress div{height:100%;background:var(--accent);width:0;transition:width .2s}
-.hidden{display:none!important}.muted{color:var(--muted)}.pill{display:inline-block;background:#203550;color:#b9d0f4;padding:4px 9px;border-radius:99px;font-size:.78rem;margin:3px}
-footer{text-align:center;color:var(--muted);padding:20px;font-size:.85rem}
-@media(max-width:600px){.stats{grid-template-columns:repeat(3,1fr)}.stat{padding:9px}.choices{grid-template-columns:1fr}.panel{padding:14px}}
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-.topbar{padding:18px 20px 0;max-width:1100px;margin:auto}
-.topbar .tag{font-size:.78rem;letter-spacing:.22em}
-.home-screen{min-height:calc(100svh - 55px);display:grid;place-items:center;padding:20px;overflow:hidden;position:relative}
-.home-center{position:relative;text-align:center;width:min(100%,620px);padding:45px 20px;z-index:1}
-.home-kicker{color:var(--accent);font-weight:800;letter-spacing:.18em;font-size:.76rem}
-.home-center h1{font-size:clamp(3.2rem,12vw,6.4rem);line-height:.98;letter-spacing:-.055em;margin:16px 0}
-.home-center h1 span{color:var(--accent);text-shadow:0 0 35px #69e0c155}
-.home-sub{color:var(--muted);font-size:1rem;margin:0 0 28px}
-.home-actions{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.start-hero{position:relative;display:flex;align-items:center;justify-content:center;gap:22px;min-width:min(290px,82vw);padding:20px 27px;border:0;border-radius:18px;background:linear-gradient(110deg,#69e0c1,#9df4d9);color:#082019;font-size:1.1rem;letter-spacing:.1em;box-shadow:0 0 0 0 #69e0c166;animation:pulseStart 2s infinite;transition:transform .2s}
-.start-hero:hover{transform:translateY(-4px) scale(1.025)}.start-hero b{font-size:1.55rem}
-@keyframes pulseStart{0%{box-shadow:0 0 0 0 #69e0c166,0 12px 35px #0005}70%{box-shadow:0 0 0 18px #69e0c100,0 12px 35px #0005}100%{box-shadow:0 0 0 0 #69e0c100,0 12px 35px #0005}}
-.list-side{font-size:.88rem;padding:12px 15px;border-radius:13px;background:#16263b;border-color:#38506e;color:#dceaff}.list-side span{color:var(--accent);margin-left:8px}
-.orbit{position:absolute;border:1px solid #69e0c11b;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
-.orbit-one{width:min(88vw,580px);aspect-ratio:1}.orbit-two{width:min(110vw,760px);aspect-ratio:1;border-style:dashed;animation:spinOrbit 55s linear infinite}
-@keyframes spinOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.download-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#173c3a;color:#a9f2d5;border:1px solid #287a67;border-radius:11px;padding:10px 13px;font-weight:800;font-size:.85rem}
-.valency-main{color:#9af0d3;font-weight:900;background:#153b34;padding:3px 8px;border-radius:7px;display:inline-block;margin-right:5px}
-.valency-extra{color:#d9e5f5;background:#27364c;padding:3px 7px;border-radius:7px;display:inline-block;margin:2px}
-.bottom-info{max-width:900px;margin:20px auto 0;padding:20px 22px 36px;color:var(--muted);text-align:center;font-size:.88rem}
-.bottom-info strong{color:#dceaff}
-#appMain{padding-top:10px}
-@media(max-width:560px){.home-center{padding:25px 10px}.home-actions{gap:10px}.start-hero{width:100%;max-width:340px}.list-side{width:auto}.topbar{padding-top:15px}}
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #080d18;
+  color: white;
+  font-family: system-ui, sans-serif;
+  touch-action: none;
+}
 
+#game {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#startScreen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 50% 45%,
+      #182d50 0%, #0b1426 50%, #080d18 100%);
+}
+
+#startBtn {
+  width: min(72vw, 330px);
+  height: 100px;
+  border: 0;
+  border-radius: 30px;
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  background: linear-gradient(145deg, #62e8ff, #2585ff);
+  box-shadow:
+    0 12px 0 #1453a5,
+    0 25px 60px #2585ff55,
+    inset 0 3px 5px #ffffff77;
+  cursor: pointer;
+  transition: transform .15s;
+}
+
+#startBtn:active {
+  transform: translateY(8px);
+  box-shadow: 0 4px 0 #1453a5;
+}
+
+#hud {
+  position: fixed;
+  top: 18px;
+  left: 0;
+  width: 100%;
+  padding: 0 20px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.stat {
+  padding: 10px 16px;
+  border-radius: 18px;
+  background: #101a2add;
+  border: 1px solid #ffffff20;
+  backdrop-filter: blur(12px);
+  font-size: 13px;
+  color: #a9c1e4;
+}
+
+.stat strong {
+  display: block;
+  font-size: 22px;
+  color: white;
+}
+
+#joystick {
+  position: fixed;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 25%,
+    #ffffff25, #ffffff08 60%, #00000025);
+  border: 2px solid #ffffff30;
+  box-shadow:
+    inset 0 5px 15px #ffffff12,
+    0 15px 35px #00000055;
+  touch-action: none;
+}
+
+#stick {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffffff, #9bb9e9);
+  box-shadow:
+    0 7px 0 #526e9b,
+    0 12px 25px #00000055,
+    inset 0 3px 8px white;
+  transform: translate(0, 0);
+}
+
+#gameOver {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #050a14dd;
+  backdrop-filter: blur(10px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#gameOver h1 {
+  font-size: 42px;
+  margin: 0;
+}
+
+#restart {
+  padding: 18px 35px;
+  border: 0;
+  border-radius: 20px;
+  background: #398bff;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
 </style>
 </head>
+
 <body>
-<header class="topbar"><div class="tag">PRACTICE TIME</div></header>
-<section id="homeScreen" class="home-screen">
- <div class="home-center">
-  <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-  <div class="home-kicker">CLASS 10 • CHEMISTRY</div>
-  <h1>Ready to<br><span>practice?</span></h1>
-  <p class="home-sub">Test your element and valency knowledge.</p>
-  <div class="home-actions">
-   <button class="start-hero" id="heroStart"><span>START QUIZ</span><b>→</b></button>
-   <button class="list-side" id="heroList">Valency list <span>↗</span></button>
-  </div>
- </div>
-</section>
-<main id="appMain" class="hidden">
- <div class="stats">
-  <div class="stat"><b id="totalCount">30+</b><span>Elements to revise</span></div>
-  <div class="stat"><b id="scoreTop">0</b><span>Correct answers</span></div>
-  <div class="stat"><b id="streakTop">0</b><span>Current streak</span></div>
- </div>
- <nav class="tabs">
-  <button class="active" data-tab="learn">Element list</button>
-  <button data-tab="quiz">Quiz practice</button>
-  <button data-tab="tips">Valency guide</button>
- </nav>
 
- <section id="learn" class="tabcontent">
-  <div class="panel">
-   <h2>Element valency chart</h2>
-   <p class="muted">Search by element name, symbol, or atomic number. A slash shows common variable valencies.</p>
-   <div class="controls">
-    <a class="download-link" href="Valency_list.png" download="Valency_list.png">↓ Download Valency_list.png</a>
-    <input id="search" placeholder="Search: iron, Fe, 26…" aria-label="Search elements">
-    <select id="groupFilter" aria-label="Filter elements">
-     <option value="all">All elements</option><option value="first30">First 30 elements</option><option value="extra">Extra syllabus elements</option><option value="variable">Variable valency</option>
-    </select>
-   </div>
-   <div class="tablewrap"><table><thead><tr><th>Atomic no.</th><th>Element</th><th>Symbol</th><th>Common valency</th></tr></thead><tbody id="elementRows"></tbody></table></div>
-   <p class="muted" id="rowCount"></p>
-  </div>
- </section>
+<canvas id="game"></canvas>
 
- <section id="quiz" class="tabcontent hidden">
-  <div class="panel">
-   <div class="controls">
-    <select id="quizMode"><option value="mixed">Mixed quiz</option><option value="symbol">Name the symbol</option><option value="valency">Find the valency</option><option value="name">Name the element</option><option value="number">Atomic number</option></select>
-    <select id="quizSize"><option value="10">10 questions</option><option value="15">15 questions</option><option value="20">20 questions</option></select>
-    <button class="primary" id="startBtn">Start / Restart</button>
-   </div>
-   <div class="progress"><div id="progressBar"></div></div>
-   <div class="muted" id="questionMeta">Press Start to begin.</div>
-   <div class="question" id="questionText">Ready to test your valency knowledge?</div>
-   <div class="choices" id="choices"></div>
-   <div class="feedback hidden" id="feedback" aria-live="polite"></div>
-   <div class="controls"><button id="nextBtn" class="primary" disabled>Next question →</button></div>
-   <div id="result" class="hidden"></div>
-  </div>
- </section>
+<div id="startScreen">
+  <button id="startBtn">START</button>
+</div>
 
- <section id="tips" class="tabcontent hidden">
-  <div class="panel">
-   <h2>Quick valency guide</h2>
-   <p>Valency is the combining capacity of an atom. For many main-group elements, the valency can be understood from the number of electrons an atom loses, gains, or shares to complete its outer shell.</p>
-   <div class="pill">Group 1 → 1</div><div class="pill">Group 2 → 2</div><div class="pill">Group 13 → 3</div><div class="pill">Group 14 → 4 (common)</div><div class="pill">Group 15 → 3 (common)</div><div class="pill">Group 16 → 2 (common)</div><div class="pill">Group 17 → 1 (common)</div><div class="pill">Group 18 → 0</div>
-   <h3>Remember these variable valencies</h3>
-   <p><b>Iron (Fe):</b> 2, 3 &nbsp; <b>Copper (Cu):</b> 1, 2 &nbsp; <b>Mercury (Hg):</b> 1, 2</p>
-   <p><b>Tin (Sn):</b> 2, 4 &nbsp; <b>Lead (Pb):</b> 2, 4 &nbsp; <b>Chromium (Cr):</b> 2, 3, 6</p>
-   <p class="muted">Important: Valency can depend on the compound. These are common school-level values for revision, not every oxidation state an element can show.</p>
+<div id="hud">
+  <div class="stat">
+    TERRITORY
+    <strong id="score">0%</strong>
   </div>
-  <div class="panel">
-   <h3>Formula-writing reminder</h3>
-   <p>For a simple ionic compound, write the symbols, note their valencies, then criss-cross the numbers as subscripts and simplify if possible.</p>
-   <p><b>Example:</b> Magnesium (2) + Chlorine (1) → MgCl₂</p>
-   <p><b>Example:</b> Aluminium (3) + Oxygen (2) → Al₂O₃</p>
+  <div class="stat">
+    BEST
+    <strong id="best">0%</strong>
   </div>
- </section>
-</main>
-<footer class="bottom-info"><strong>About this practice</strong><br>Revise the first 30 elements, their symbols, atomic numbers and common school-level valencies. Use the searchable list for quick revision and the quiz to check your progress. Where more than one common valency is shown, the first value is highlighted and the remaining values are shown beside it. Valency may vary with the compound.</footer>
+</div>
+
+<div id="joystick">
+  <div id="stick"></div>
+</div>
+
+<div id="gameOver">
+  <h1>GAME OVER</h1>
+  <div id="finalScore">Territory: 0%</div>
+  <button id="restart">PLAY AGAIN</button>
+</div>
+
 <script>
-const elements = [
-[1,"Hydrogen","H","1","first30"],[2,"Helium","He","0","first30"],[3,"Lithium","Li","1","first30"],[4,"Beryllium","Be","2","first30"],[5,"Boron","B","3","first30"],[6,"Carbon","C","4","first30"],[7,"Nitrogen","N","3, 5","first30"],[8,"Oxygen","O","2","first30"],[9,"Fluorine","F","1","first30"],[10,"Neon","Ne","0","first30"],
-[11,"Sodium","Na","1","first30"],[12,"Magnesium","Mg","2","first30"],[13,"Aluminium","Al","3","first30"],[14,"Silicon","Si","4","first30"],[15,"Phosphorus","P","3, 5","first30"],[16,"Sulfur","S","2, 4, 6","first30"],[17,"Chlorine","Cl","1, 3, 5, 7","first30"],[18,"Argon","Ar","0","first30"],[19,"Potassium","K","1","first30"],[20,"Calcium","Ca","2","first30"],
-[21,"Scandium","Sc","3","first30"],[22,"Titanium","Ti","3, 4","first30"],[23,"Vanadium","V","3, 4, 5","first30"],[24,"Chromium","Cr","2, 3, 6","first30"],[25,"Manganese","Mn","2, 4, 7","first30"],[26,"Iron","Fe","2, 3","first30"],[27,"Cobalt","Co","2, 3","first30"],[28,"Nickel","Ni","2","first30"],[29,"Copper","Cu","1, 2","first30"],[30,"Zinc","Zn","2","first30"],
-[33,"Arsenic","As","3, 5","extra"],[35,"Bromine","Br","1, 3, 5, 7","extra"],[47,"Silver","Ag","1","extra"],[48,"Cadmium","Cd","2","extra"],[50,"Tin","Sn","2, 4","extra"],[53,"Iodine","I","1, 3, 5, 7","extra"],[56,"Barium","Ba","2","extra"],[74,"Tungsten","W","6","extra"],[78,"Platinum","Pt","2, 4","extra"],[79,"Gold","Au","1, 3","extra"],[80,"Mercury","Hg","1, 2","extra"],[82,"Lead","Pb","2, 4","extra"],[83,"Bismuth","Bi","3, 5","extra"],[32,"Germanium","Ge","2, 4","extra"],[31,"Gallium","Ga","3","extra"]
-];
-const variable = e => e[3].includes(",");
-const rows=document.getElementById("elementRows"), search=document.getElementById("search"), filter=document.getElementById("groupFilter");
-function renderRows(){
- const q=search.value.toLowerCase().trim(), f=filter.value;
- const found=elements.filter(e=>(f==="all"||(f==="variable"?variable(e):e[4]===f))&&(!q||[e[0],e[1],e[2],e[3]].some(v=>String(v).toLowerCase().includes(q))));
- rows.innerHTML=found.map(e=>{const vals=e[3].split(",").map(v=>v.trim());const valHTML=vals.map((v,i)=>`<span class="${i===0?'valency-main':'valency-extra'}">${v}</span>`).join("");return `<tr><td>${e[0]}</td><td>${e[1]}</td><td class="symbol">${e[2]}</td><td>${valHTML}</td></tr>`}).join("");
- document.getElementById("rowCount").textContent=`Showing ${found.length} of ${elements.length} elements`;
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const startScreen = document.getElementById("startScreen");
+const startBtn = document.getElementById("startBtn");
+const joystick = document.getElementById("joystick");
+const stick = document.getElementById("stick");
+const hud = document.getElementById("hud");
+const gameOver = document.getElementById("gameOver");
+
+let W, H, dpr;
+let running = false;
+let lastTime = 0;
+let accumulator = 0;
+
+const CELL = 18;
+let cols, rows, grid;
+let trail = [];
+let player;
+let bot;
+
+let joy = { x: 0, y: 0 };
+let joyActive = false;
+let joyPointer = null;
+
+let score = 0;
+let best = 0;
+
+const colors = {
+  background: "#101827",
+  grid: "#1b2940",
+  player: "#38c9ff",
+  bot: "#ff5978",
+  neutral: "#17243a"
+};
+
+function resize() {
+  W = window.innerWidth;
+  H = window.innerHeight;
+
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+
+  canvas.style.width = W + "px";
+  canvas.style.height = H + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  cols = Math.ceil(W / CELL);
+  rows = Math.ceil(H / CELL);
+
+  if (!grid) resetGame();
 }
-search.addEventListener("input",renderRows);filter.addEventListener("change",renderRows);renderRows();
-document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{
- document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("active",x===b));
- document.querySelectorAll(".tabcontent").forEach(x=>x.classList.toggle("hidden",x.id!==b.dataset.tab));
-}));
-let questions=[],index=0,score=0,streak=0,locked=false;
-const $=id=>document.getElementById(id);
-function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
-function makeQuestion(e,mode){
- const others=shuffle(elements.filter(x=>x!==e));
- let prompt,answer;
- if(mode==="symbol"){prompt=`What is the symbol of ${e[1]}?`;answer=e[2]}
- else if(mode==="name"){prompt=`Which element has the symbol ${e[2]}?`;answer=e[1]}
- else if(mode==="number"){prompt=`What is the atomic number of ${e[1]} (${e[2]})?`;answer=String(e[0])}
- else {prompt=`What is the common valency of ${e[1]} (${e[2]})?`;answer=e[3]}
- const pool=mode==="symbol"?others.map(x=>x[2]):mode==="name"?others.map(x=>x[1]):mode==="number"?others.map(x=>String(x[0])):others.map(x=>x[3]);
- const opts=shuffle([answer,...pool.filter(x=>x!==answer).slice(0,3)]);
- return {prompt,answer,opts,explain:`${e[1]} (${e[2]}) — common valency: ${e[3]}; atomic number: ${e[0]}.`};
+
+window.addEventListener("resize", resize);
+
+function resetGame() {
+  cols = Math.ceil(W / CELL);
+  rows = Math.ceil(H / CELL);
+
+  grid = new Uint8Array(cols * rows);
+  trail = [];
+
+  player = {
+    x: Math.floor(cols / 2),
+    y: Math.floor(rows / 2),
+    dx: 1,
+    dy: 0,
+    progress: 0,
+    speed: 5.5
+  };
+
+  bot = {
+    x: Math.floor(cols * 0.2),
+    y: Math.floor(rows * 0.25),
+    dx: 1,
+    dy: 0,
+    progress: 0,
+    speed: 4.5
+  };
+
+  // Starting territory
+  for (let y = player.y - 2; y <= player.y + 2; y++) {
+    for (let x = player.x - 2; x <= player.x + 2; x++) {
+      setCell(x, y, 1);
+    }
+  }
+
+  // Opponent's starting territory
+  for (let y = bot.y - 2; y <= bot.y + 2; y++) {
+    for (let x = bot.x - 2; x <= bot.x + 2; x++) {
+      setCell(x, y, 2);
+    }
+  }
+
+  score = 0;
+  updateScore();
 }
-function start(){
- const mode=$("quizMode").value,n=Number($("quizSize").value), pool=shuffle(elements);
- questions=Array.from({length:n},(_,i)=>makeQuestion(pool[i%pool.length],mode==="mixed"?["symbol","name","number","valency"][i%4]:mode));
- index=0;score=0;streak=0;locked=false;$("scoreTop").textContent=score;$("streakTop").textContent=streak;$("result").classList.add("hidden");showQuestion();
+
+function index(x, y) {
+  return y * cols + x;
 }
-function showQuestion(){
- locked=false;const q=questions[index];$("questionMeta").textContent=`Question ${index+1} of ${questions.length} • Score ${score}`;$("questionText").textContent=q.prompt;
- $("progressBar").style.width=`${index/questions.length*100}%`;$("feedback").className="feedback hidden";$("feedback").textContent="";$("nextBtn").disabled=true;
- $("choices").innerHTML="";q.opts.forEach(opt=>{const b=document.createElement("button");b.className="choice";b.textContent=opt;b.addEventListener("click",()=>choose(opt,b));$("choices").appendChild(b)});
+
+function inside(x, y) {
+  return x >= 0 && y >= 0 && x < cols && y < rows;
 }
-function choose(opt,btn){
- if(locked)return;locked=true;const q=questions[index],correct=opt===q.answer;
- document.querySelectorAll(".choice").forEach(b=>{b.disabled=true;if(b.textContent===q.answer)b.classList.add("correct")});
- const fb=$("feedback");fb.classList.remove("hidden");fb.classList.add(correct?"good":"bad");fb.textContent=(correct?"Correct! ":"Not quite. Correct answer: "+q.answer+". ")+q.explain;
- if(correct){score++;streak++}else streak=0;
- $("scoreTop").textContent=score;$("streakTop").textContent=streak;$("questionMeta").textContent=`Question ${index+1} of ${questions.length} • Score ${score}`;$("nextBtn").disabled=false;
+
+function getCell(x, y) {
+  if (!inside(x, y)) return -1;
+  return grid[index(x, y)];
 }
-$("startBtn").addEventListener("click",start);
-$("nextBtn").addEventListener("click",()=>{
- if(index<questions.length-1){index++;showQuestion()}else{
- $("progressBar").style.width="100%";$("questionText").textContent="Quiz completed!";$("choices").innerHTML="";$("feedback").classList.add("hidden");
- $("result").classList.remove("hidden");const pct=Math.round(score/questions.length*100);
- $("result").innerHTML=`<h2>Your score: ${score}/${questions.length} (${pct}%)</h2><p>${pct>=80?"Excellent revision! Keep it up.":pct>=50?"Good effort. Revise the missed elements and try again.":"Keep practising. Use the element chart, then restart the quiz."}</p><button class="primary" onclick="start()">Try another round</button>`;
- $("questionMeta").textContent="Finished";$("nextBtn").disabled=true;
- }
+
+function setCell(x, y, value) {
+  if (inside(x, y)) {
+    grid[index(x, y)] = value;
+  }
+}
+
+function updateScore() {
+  let owned = 0;
+
+  for (let i = 0; i < grid.length; i++) {
+    if (grid[i] === 1) owned++;
+  }
+
+  score = Math.round(owned / grid.length * 100);
+
+  document.getElementById("score").textContent = score + "%";
+
+  best = Math.max(best, score);
+
+  document.getElementById("best").textContent = best + "%";
+}
+
+function capture() {
+  if (trail.length === 0) return;
+
+  for (const p of trail) {
+    setCell(p.x, p.y, 1);
+  }
+
+  // Fill enclosed territory using flood fill
+  const visited = new Uint8Array(grid.length);
+  const queue = [];
+
+  for (let x = 0; x < cols; x++) {
+    addOutside(x, 0);
+    addOutside(x, rows - 1);
+  }
+
+  for (let y = 0; y < rows; y++) {
+    addOutside(0, y);
+    addOutside(cols - 1, y);
+  }
+
+  function addOutside(x, y) {
+    const i = index(x, y);
+
+    if (!visited[i] && grid[i] !== 1) {
+      visited[i] = 1;
+      queue.push({ x, y });
+    }
+  }
+
+  for (let q = 0; q < queue.length; q++) {
+    const p = queue[q];
+
+    addOutside(p.x + 1, p.y);
+    addOutside(p.x - 1, p.y);
+    addOutside(p.x, p.y + 1);
+    addOutside(p.x, p.y - 1);
+  }
+
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const i = index(x, y);
+
+      if (!visited[i] && grid[i] !== 2) {
+        grid[i] = 1;
+      }
+    }
+  }
+
+  trail = [];
+  updateScore();
+}
+
+function moveEntity(entity, dt, isPlayer) {
+  entity.progress += entity.speed * dt;
+
+  while (entity.progress >= 1) {
+    entity.progress -= 1;
+
+    if (isPlayer) {
+      if (Math.abs(joy.x) > 0.3 || Math.abs(joy.y) > 0.3) {
+        if (Math.abs(joy.x) > Math.abs(joy.y)) {
+          entity.dx = Math.sign(joy.x);
+          entity.dy = 0;
+        } else {
+          entity.dx = 0;
+          entity.dy = Math.sign(joy.y);
+        }
+      }
+    } else {
+      if (Math.random() < 0.12) {
+        const dirs = [
+          [1, 0], [-1, 0], [0, 1], [0, -1]
+        ];
+
+        const d = dirs[Math.floor(Math.random() * dirs.length)];
+        entity.dx = d[0];
+        entity.dy = d[1];
+      }
+    }
+
+    const nx = entity.x + entity.dx;
+    const ny = entity.y + entity.dy;
+
+    if (!inside(nx, ny)) {
+      entity.dx *= -1;
+      entity.dy *= -1;
+      continue;
+    }
+
+    entity.x = nx;
+    entity.y = ny;
+
+    const owner = getCell(nx, ny);
+
+    if (isPlayer) {
+      if (owner === 2) {
+        // Player can move through opponent territory
+      }
+
+      if (owner !== 1) {
+        trail.push({ x: nx, y: ny });
+      } else if (trail.length > 0) {
+        capture();
+      }
+
+      // Opponent touches the player's trail
+      if (trail.some(p => p.x === bot.x && p.y === bot.y)) {
+        trail = [];
+      }
+    } else {
+      // Opponent territory expansion
+      if (owner === 0) {
+        setCell(nx, ny, 2);
+      }
+    }
+  }
+}
+
+function drawCell(x, y, color) {
+  const px = x * CELL;
+  const py = y * CELL;
+
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.roundRect(px + 1, py + 1, CELL - 2, CELL - 2, 4);
+  ctx.fill();
+}
+
+function draw() {
+  ctx.fillStyle = colors.background;
+  ctx.fillRect(0, 0, W, H);
+
+  // Background grid
+  ctx.strokeStyle = colors.grid;
+  ctx.lineWidth = 0.6;
+
+  for (let x = 0; x < W; x += CELL) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, H);
+    ctx.stroke();
+  }
+
+  for (let y = 0; y < H; y += CELL) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(W, y);
+    ctx.stroke();
+  }
+
+  // Territory
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const owner = getCell(x, y);
+
+      if (owner === 1) {
+        drawCell(x, y, "#1686b9");
+      } else if (owner === 2) {
+        drawCell(x, y, "#a32c4c");
+      }
+    }
+  }
+
+  // Player trail
+  for (const p of trail) {
+    drawCell(p.x, p.y, "#7beaff");
+  }
+
+  drawPlayer(player, "#63eaff");
+  drawPlayer(bot, "#ff7a97");
+}
+
+function drawPlayer(entity, color) {
+  const x = (entity.x + 0.5) * CELL;
+  const y = (entity.y + 0.5) * CELL;
+
+  ctx.save();
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 18;
+
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.arc(x, y, CELL * 0.38, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.arc(x - 3, y - 3, 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function loop(time) {
+  if (!running) return;
+
+  const dt = Math.min((time - lastTime) / 1000, 0.05);
+  lastTime = time;
+
+  accumulator += dt;
+
+  while (accumulator >= 1 / 60) {
+    moveEntity(player, 1 / 60, true);
+    moveEntity(bot, 1 / 60, false);
+    accumulator -= 1 / 60;
+  }
+
+  draw();
+  requestAnimationFrame(loop);
+}
+
+function startGame() {
+  resetGame();
+
+  startScreen.style.display = "none";
+  gameOver.style.display = "none";
+  hud.style.display = "flex";
+  joystick.style.display = "flex";
+
+  running = true;
+  lastTime = performance.now();
+
+  requestAnimationFrame(loop);
+}
+
+startBtn.addEventListener("click", startGame);
+document.getElementById("restart").addEventListener("click", startGame);
+
+// Virtual joystick
+joystick.addEventListener("pointerdown", e => {
+  joyActive = true;
+  joyPointer = e.pointerId;
+  joystick.setPointerCapture(e.pointerId);
+  updateJoystick(e);
 });
-$("totalCount").textContent=elements.length;
-function openApp(tab){
- $("homeScreen").classList.add("hidden");$("appMain").classList.remove("hidden");
- document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
- document.querySelectorAll(".tabcontent").forEach(x=>x.classList.toggle("hidden",x.id!==tab));
- window.scrollTo({top:0,behavior:"smooth"});
+
+joystick.addEventListener("pointermove", e => {
+  if (joyActive && e.pointerId === joyPointer) {
+    updateJoystick(e);
+  }
+});
+
+function updateJoystick(e) {
+  const rect = joystick.getBoundingClientRect();
+
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+
+  let dx = e.clientX - cx;
+  let dy = e.clientY - cy;
+
+  const distance = Math.hypot(dx, dy);
+  const max = 45;
+
+  if (distance > max) {
+    dx = dx / distance * max;
+    dy = dy / distance * max;
+  }
+
+  joy.x = dx / max;
+  joy.y = dy / max;
+
+  stick.style.transform = `translate(${dx}px, ${dy}px)`;
 }
-$("heroStart").addEventListener("click",()=>{openApp("quiz");start()});
-$("heroList").addEventListener("click",()=>openApp("learn"));
+
+function releaseJoystick() {
+  joyActive = false;
+  joyPointer = null;
+  joy.x = 0;
+  joy.y = 0;
+  stick.style.transform = "translate(0, 0)";
+}
+
+joystick.addEventListener("pointerup", releaseJoystick);
+joystick.addEventListener("pointercancel", releaseJoystick);
+
+resize();
+draw();
 </script>
 </body>
 </html>
