@@ -11,10 +11,14 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
-IMAGE_LIST_URL = os.environ.get("IMAGE_LIST_URL", "")
-WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "")
 TIMEOUT = 12
 MAX_IMAGE_BYTES = 8 * 1024 * 1024
+
+# Add your public image/page URLs here. Keep each URL in quotes.
+IMAGE_LINKS = [
+    "https://example.com/photo.jpg",
+    "https://example.com/gallery-page",
+]
 
 def get_json(url, **kwargs):
     response = requests.get(url, timeout=TIMEOUT, **kwargs)
@@ -97,13 +101,10 @@ def is_image(url):
         return False
 
 def read_links():
-    if not IMAGE_LIST_URL:
-        raise RuntimeError("IMAGE_LIST_URL is not configured")
-    r = get_json(IMAGE_LIST_URL)
     return [
-        line.strip()
-        for line in r.text.splitlines()
-        if line.strip() and not line.strip().startswith("#")
+        link.strip()
+        for link in IMAGE_LINKS
+        if link.strip() and not link.strip().startswith("#")
     ]
 
 def telegram(method, payload):
@@ -173,13 +174,7 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_POST(self):
-        if WEBHOOK_SECRET:
-            received = self.headers.get("x-telegram-bot-api-secret-token", "")
-            if received != WEBHOOK_SECRET:
-                self.send_response(403)
-                self.end_headers()
-                return
-
+        # No webhook secret is required in this simplified setup.
         try:
             length = int(self.headers.get("Content-Length", "0"))
             raw = self.rfile.read(length)
