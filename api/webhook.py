@@ -18,6 +18,7 @@ MAX_IMAGE_BYTES = 8 * 1024 * 1024
 IMAGE_LINKS = [
     "https://example.com/photo.jpg",
     "https://example.com/gallery-page",
+    "https://share.google/YiHPovirrbRRBcy6H",
 ]
 
 def get_json(url, **kwargs):
