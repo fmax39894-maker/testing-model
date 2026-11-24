@@ -1,4 +1,1 @@
-# Put one public image URL or webpage URL on each line.
-# Replace these examples with your own links.
-https://example.com/photo.jpg
-https://example.com/gallery-page
+# Image links are now configured in api/webhook.py under IMAGE_LINKS.
